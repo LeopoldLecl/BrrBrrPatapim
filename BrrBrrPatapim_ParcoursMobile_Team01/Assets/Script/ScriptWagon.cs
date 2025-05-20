@@ -133,9 +133,4 @@ public class ScriptWagon : MonoBehaviour
             }
         }
     }
-    
-    public void zbeub()
-    {
-        Debug.Log("zbeub");
-    }
 }
