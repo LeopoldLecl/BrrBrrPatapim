@@ -10,7 +10,7 @@ public class DeathZoneFollow : MonoBehaviour
     [SerializeField] private float catchUpSpeed = 3f;
     [SerializeField] private float overshootSpeed = 5.25f;
 
-    [Header("Dépassement")]
+    [Header("Dï¿½passement")]
     [SerializeField] private float maxOvershoot = 100f;
 
     private float currentTargetY;
@@ -23,6 +23,14 @@ public class DeathZoneFollow : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioClip deathZoneLoopClip;
     [SerializeField] private AudioSource audioSource;
+    
+    private bool hasGameStarted = false;
+    
+    public bool HasGameStarted
+    {
+        get => hasGameStarted;
+        set => hasGameStarted = value;
+    }
 
 
     void Start()
@@ -41,6 +49,8 @@ public class DeathZoneFollow : MonoBehaviour
 
     void Update()
     {
+        if (!hasGameStarted) return;
+        
         float playerY = player.position.y;
 
         if (playerY > maxReachedPlayerY)
@@ -57,17 +67,17 @@ public class DeathZoneFollow : MonoBehaviour
             currentTargetY = Mathf.MoveTowards(transform.position.y, playerY + verticalOffset, catchUpSpeed * Time.deltaTime);
         }
 
-        transform.position = new Vector3(transform.position.x, currentTargetY, transform.position.z);
+        transform.position = new Vector3(player.transform.position.x, currentTargetY, transform.position.z);
 
         if (isShifting)
         {
             float newY = Mathf.Lerp(transform.position.y, shiftTargetY, Time.deltaTime * shiftSpeed);
-            transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+            transform.position = new Vector3(player.transform.position.x, newY, transform.position.z);
             currentTargetY = transform.position.y;
 
             if (Mathf.Abs(transform.position.y - shiftTargetY) < 0.01f)
             {
-                transform.position = new Vector3(transform.position.x, shiftTargetY, transform.position.z);
+                transform.position = new Vector3(player.transform.position.x, shiftTargetY, transform.position.z);
                 currentTargetY = shiftTargetY;
                 isShifting = false;
             }

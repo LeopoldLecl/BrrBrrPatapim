@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PortalsManager : MonoBehaviour
 {
+    public static PortalsManager Instance;
+    
     [SerializeField] private List<GameObject> portalsList = new List<GameObject>();
     [SerializeField] private Transform player;
     [SerializeField] private float spawnDistanceAhead = 20f;
@@ -17,8 +21,21 @@ public class PortalsManager : MonoBehaviour
     private List<GameObject> activePortals = new List<GameObject>();
     private List<GameObject> weightedPortalsList = new List<GameObject>();
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
+        Debug.Log("PortalsManager started");
         // Build weighted list
         weightedPortalsList.Clear();
         if (portalsList.Count > 0)
@@ -31,6 +48,13 @@ public class PortalsManager : MonoBehaviour
                 weightedPortalsList.Add(portalsList[i]);
         }
 
+
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine(SpawnPortalsCoroutine());
+        
         // Initialize pool
         for (int i = 0; i < poolSize; i++)
         {
@@ -39,8 +63,17 @@ public class PortalsManager : MonoBehaviour
             portal.SetActive(false);
             portalPool.Add(portal);
         }
-
-        StartCoroutine(SpawnPortalsCoroutine());
+    }
+    
+    public void StopGame()
+    {
+        StopAllCoroutines();
+        foreach (var portal in activePortals)
+        {
+            portal.SetActive(false);
+            portalPool.Add(portal);
+        }
+        activePortals.Clear();
     }
 
     private IEnumerator SpawnPortalsCoroutine()

@@ -8,6 +8,8 @@ using static GameplayEnums;
 
 public class ScriptWagon : MonoBehaviour
 {
+    public static ScriptWagon Instance;
+    
     [FormerlySerializedAs("_prefab")] [SerializeField] private GameObject prefab;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float boostSpeed = 35f; // Adjust as needed
@@ -26,6 +28,13 @@ public class ScriptWagon : MonoBehaviour
     private ParticleSystem _boostParticleSystem;
     
     private bool _isBoosting = false;
+    private bool _hasGameStarted = false;
+    
+    public bool HasGameStarted
+    {
+        get => _hasGameStarted;
+        set => _hasGameStarted = value;
+    }
 
     private void Start()
     {
@@ -36,10 +45,30 @@ public class ScriptWagon : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 60;
+        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Update()
     {
+        _positionHistory.Insert(0, transform.position);
+
+        // Limit history size
+        int requiredHistory = Mathf.CeilToInt(_wagonsList.Count * spacing * 10);
+        if (_positionHistory.Count > requiredHistory)
+        {
+            _positionHistory.RemoveRange(requiredHistory, _positionHistory.Count - requiredHistory);
+        }
+
+        UpdateWagonsPositions();
+        if (!HasGameStarted) return;
         
         // Handle rotation based on touch input
         float targetRotationX = Input.touchCount > 0 ? 45f : -45f;
@@ -58,16 +87,6 @@ public class ScriptWagon : MonoBehaviour
         transform.Translate((Vector3.forward * -1) * speed * Time.deltaTime);
 
         // Record position for wagons to follow
-        _positionHistory.Insert(0, transform.position);
-
-        // Limit history size
-        int requiredHistory = Mathf.CeilToInt(_wagonsList.Count * spacing * 10);
-        if (_positionHistory.Count > requiredHistory)
-        {
-            _positionHistory.RemoveRange(requiredHistory, _positionHistory.Count - requiredHistory);
-        }
-
-        UpdateWagonsPositions();
     }
 
     private void RotateToX(float targetX)
