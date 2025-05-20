@@ -133,4 +133,9 @@ public class ConventionDeGeneve : MonoBehaviour
             }
         }
     }
+    
+    public void zbeub()
+    {
+        Debug.Log("zbeub");
+    }
 }
