@@ -46,6 +46,7 @@ public class ScriptWagon : MonoBehaviour
         {
             RotateToX(targetRotationX);
             _currentTargetRotationX = targetRotationX;
+            Debug.Log("caca");
         }
 
         // Move locomotive forward
@@ -133,9 +134,5 @@ public class ScriptWagon : MonoBehaviour
             }
         }
     }
-    
-    public void zbeub()
-    {
-        Debug.Log("zbeub");
-    }
+
 }
