@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d0776fe-eb91-4e7d-ae76-77465e9ebfd4" name="Changes" comment="" />
+    <list default="true" id="0d0776fe-eb91-4e7d-ae76-77465e9ebfd4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BrrBrrPatapim_ParcoursMobile_Team01/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BrrBrrPatapim_ParcoursMobile_Team01/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/LD/PortailRouge.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/LD/PortailRouge.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/LD/PortailVert.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/LD/PortailVert.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,8 +33,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "apagnan",
+    "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -98,6 +106,7 @@
       <updated>1747661683990</updated>
       <workItem from="1747661685880" duration="1669000" />
       <workItem from="1747665984957" duration="5117000" />
+      <workItem from="1747734824646" duration="5730000" />
     </task>
     <servers />
   </component>
