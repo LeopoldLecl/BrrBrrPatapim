@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8238619394939708032}
   - component: {fileID: 7091576673665860557}
   - component: {fileID: 3091098685624269918}
-  - component: {fileID: 2499040816050834770}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -87,27 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2499040816050834770
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1048460377296052038}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2053424930406802441
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4710779485176886911}
   - component: {fileID: 5395895853911223493}
+  - component: {fileID: 433517418960209496}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -164,6 +143,33 @@ MonoBehaviour:
   portalValue: {fileID: 6264611852547095328}
   minValue: 5
   maxValue: 50
+--- !u!54 &433517418960209496
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053424930406802441}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &3695195275233923068
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +289,6 @@ GameObject:
   - component: {fileID: 2109486718375256743}
   - component: {fileID: 7687926097737570604}
   - component: {fileID: 2145305684006784354}
-  - component: {fileID: 6884336681755402840}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -359,27 +364,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6884336681755402840
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4641027834230386257}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8090732989187302273
 GameObject:
   m_ObjectHideFlags: 0

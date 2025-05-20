@@ -19,6 +19,14 @@ public class Portal : MonoBehaviour
 
     [SerializeField] private int minValue;
     [SerializeField] private int maxValue;
+
+    private int value;
+    
+    public int Value
+    {
+        get => value;
+    }
+
     
     private void Start()
     {
@@ -30,12 +38,13 @@ public class Portal : MonoBehaviour
     {
         PortalType[] weightedTypes = new PortalType[]
         {
-            PortalType.RED, PortalType.RED, PortalType.RED, PortalType.RED,
-            PortalType.GREEN, PortalType.GREEN, PortalType.GREEN, PortalType.GREEN,
-            PortalType.AD, PortalType.AD // Assuming AD is your "blue" portal
+            PortalType.RED, PortalType.RED, PortalType.RED, PortalType.RED,PortalType.RED, PortalType.RED, PortalType.RED, PortalType.RED,
+            PortalType.GREEN, PortalType.GREEN, PortalType.GREEN, PortalType.GREEN,PortalType.GREEN, PortalType.GREEN, PortalType.GREEN, PortalType.GREEN,
+            PortalType.AD // Assuming AD is your "blue" portal
         };
         portalType = weightedTypes[UnityEngine.Random.Range(0, weightedTypes.Length)];
     }
+    
     
     private void OnTriggerEnter(Collider other)
     {
@@ -53,6 +62,7 @@ public class Portal : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+        other.GetComponent<ScriptWagon>()?.OnPortalTouched(portalType, Value);
     }
 
     private void ChangeMaterialAndValues()
@@ -77,7 +87,7 @@ public class Portal : MonoBehaviour
     
     private void CalculatePortalValue()
     {
-        int value = UnityEngine.Random.Range(minValue, maxValue);
+        value = UnityEngine.Random.Range(minValue, maxValue);
         string sign;
 
         switch(portalType)
@@ -90,7 +100,7 @@ public class Portal : MonoBehaviour
                 break;
             case PortalType.AD:
                 sign = "+";
-                value *= 2;
+                value *= 5;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

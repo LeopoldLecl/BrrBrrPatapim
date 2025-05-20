@@ -4,30 +4,33 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using static GameplayEnums;
 
 public class ScriptWagon : MonoBehaviour
 {
     [FormerlySerializedAs("_prefab")] [SerializeField] private GameObject prefab;
     [SerializeField] private float speed = 5f;
+    [SerializeField] private float boostSpeed = 35f; // Adjust as needed
     [SerializeField] private float turnSpeed = 3f;
     [SerializeField] private float followSpeed = 3f;
     [SerializeField] private float spacing = 1.2f;
     [SerializeField] private int wagonsCount = 10; // Speed of rotation
     [SerializeField] private KeyCode rotateButton = KeyCode.Space; // Button to hold for rotation
     [SerializeField] private float firstWagonSpacing = 3f;
-    
-    [Header("Events")]
-    public UnityEvent onScreenTouched;
-    public UnityEvent onScreenReleased;
 
     private List<Transform> _wagonsList = new List<Transform>();
     private List<Vector3> _positionHistory = new List<Vector3>();
     private Tween _currentRotationTween;
     private float _currentTargetRotationX = 0f; // Track the current target rotation
+    
+    private ParticleSystem _boostParticleSystem;
+    
+    private bool _isBoosting = false;
 
     private void Start()
     {
         SpawnWagons(wagonsCount);
+        _boostParticleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Awake()
@@ -41,13 +44,15 @@ public class ScriptWagon : MonoBehaviour
         // Handle rotation based on touch input
         float targetRotationX = Input.touchCount > 0 ? 45f : -45f;
 
-        // Only create new tween when target rotation changes
-        if (targetRotationX != _currentTargetRotationX)
+        if (!_isBoosting)
         {
-            RotateToX(targetRotationX);
-            _currentTargetRotationX = targetRotationX;
-            Debug.Log("caca");
+            if (targetRotationX != _currentTargetRotationX)
+            {
+                RotateToX(targetRotationX);
+                _currentTargetRotationX = targetRotationX;
+            }
         }
+
 
         // Move locomotive forward
         transform.Translate((Vector3.forward * -1) * speed * Time.deltaTime);
@@ -134,5 +139,68 @@ public class ScriptWagon : MonoBehaviour
             }
         }
     }
+    
+    
+    public void OnPortalTouched(GameplayEnums.PortalType portal, int value)
+    {
+        if (_isBoosting) return;
 
+        float targetY = transform.position.y;
+        float direction = 0f;
+
+        switch (portal)
+        {
+            case PortalType.GREEN:
+            case PortalType.AD:
+                direction = 1f;
+                targetY += value;
+                break;
+            case PortalType.RED:
+                direction = -1f;
+                targetY -= value;
+                break;
+        }
+
+        if (direction != 0f)
+        {
+            StartCoroutine(BoostToY(targetY, direction));
+        }
+    }
+
+    private System.Collections.IEnumerator BoostToY(float targetY, float direction)
+    {
+        _isBoosting = true;
+        float originalSpeed = speed;
+        float originalTurnSpeed = turnSpeed;
+        speed = boostSpeed;
+        float originalFollowSpeed = followSpeed;
+        followSpeed += 500f;
+        turnSpeed = 0f; // Prevent rotation
+        _boostParticleSystem?.Play();
+
+        // Set angle for boost (e.g., 60 up, -60 down)
+        float boostAngle = direction > 0 ? 60f : -60f;
+        RotateToX(boostAngle);
+
+        while ((direction > 0 && transform.position.y < targetY) ||
+               (direction < 0 && transform.position.y > targetY))
+        {
+            // Move in the boost direction
+            transform.Translate(Vector3.up * direction * boostSpeed * Time.deltaTime, Space.World);
+            yield return null;
+        }
+
+        // Snap to target Y
+        Vector3 pos = transform.position;
+        pos.y = targetY;
+        transform.position = pos;
+
+        // Restore controls
+        speed = originalSpeed;
+        turnSpeed = originalTurnSpeed;
+        _isBoosting = false;
+        followSpeed = originalFollowSpeed;
+        _boostParticleSystem?.Stop();
+        RotateToX(Input.touchCount > 0 ? 45f : -45f); // Restore angle
+    }
 }
