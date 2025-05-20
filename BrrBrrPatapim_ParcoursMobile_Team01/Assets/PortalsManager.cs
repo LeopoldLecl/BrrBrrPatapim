@@ -73,7 +73,7 @@ public class PortalsManager : MonoBehaviour
         GameObject portal = portalPool[0];
         portalPool.RemoveAt(0);
 
-        float y = Random.Range(minY, maxY);
+        float y = Random.Range(player.transform.position.y + minY,player.transform.position.y + maxY);
         Vector3 spawnPos = new Vector3(player.position.x + spawnDistanceAhead, y, player.position.z);
 
         // Pick prefab for appearance (if you want to randomize type on spawn)
