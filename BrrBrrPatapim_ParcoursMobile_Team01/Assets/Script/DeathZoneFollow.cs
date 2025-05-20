@@ -18,7 +18,11 @@ public class DeathZoneFollow : MonoBehaviour
 
     private bool isShifting = false;
     private float shiftTargetY;
-    [SerializeField] private float shiftSpeed = 3f; 
+    [SerializeField] private float shiftSpeed = 3f;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip deathZoneLoopClip;
+    [SerializeField] private AudioSource audioSource;
 
 
     void Start()
@@ -44,29 +48,23 @@ public class DeathZoneFollow : MonoBehaviour
             maxReachedPlayerY = playerY;
         }
 
-        // Calcule la cible à dépasser (ex : si offset = -5, overshoot = 3, alors on vise Y = playerY - 2)
         float overshootTargetY = maxReachedPlayerY + verticalOffset + maxOvershoot;
 
-        // Move vers cette cible (on dépasse le joueur à terme)
         currentTargetY = Mathf.MoveTowards(transform.position.y, overshootTargetY, overshootSpeed * Time.deltaTime);
 
-        // Si on est en dessous du joueur (et donc à la traîne), on accélère pour rattraper
         if (transform.position.y < playerY + verticalOffset)
         {
             currentTargetY = Mathf.MoveTowards(transform.position.y, playerY + verticalOffset, catchUpSpeed * Time.deltaTime);
         }
 
-        // Applique la position
         transform.position = new Vector3(transform.position.x, currentTargetY, transform.position.z);
 
-        // Smooth shift vers une nouvelle hauteur définie par ShiftZone()
         if (isShifting)
         {
             float newY = Mathf.Lerp(transform.position.y, shiftTargetY, Time.deltaTime * shiftSpeed);
             transform.position = new Vector3(transform.position.x, newY, transform.position.z);
             currentTargetY = transform.position.y;
 
-            // Arrêt du lerp quand suffisamment proche
             if (Mathf.Abs(transform.position.y - shiftTargetY) < 0.01f)
             {
                 transform.position = new Vector3(transform.position.x, shiftTargetY, transform.position.z);
@@ -83,9 +81,30 @@ public class DeathZoneFollow : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player entered the death zone.");
+            if (audioSource != null && deathZoneLoopClip != null)
+            {
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.clip = deathZoneLoopClip;
+                    audioSource.loop = true;
+                    audioSource.Play();
+                }
+            }
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (audioSource != null && audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
+    }
+
+
 
     public void ShiftZone(float delta)
     {
