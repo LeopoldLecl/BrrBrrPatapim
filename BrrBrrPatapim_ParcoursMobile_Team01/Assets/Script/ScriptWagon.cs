@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-public class ConventionDeGeneve : MonoBehaviour
+public class ScriptWagon : MonoBehaviour
 {
     [FormerlySerializedAs("_prefab")] [SerializeField] private GameObject prefab;
     [SerializeField] private float speed = 5f;
