@@ -18,12 +18,13 @@ public class ScoreScript : MonoBehaviour
     [SerializeField] private float rotationLerpSpeed = 6f;
     [SerializeField] private float soundCooldown = 0.2f;
 
-    private float maxHeightReached = 0f;
     private int displayedScore = 0;
     private int actualScore = 0;
     private Vector3 originalScale;
     private Quaternion originalRotation;
     private float soundTimer = 0f;
+
+    private float previousPlayerY;
 
     void Start()
     {
@@ -36,20 +37,25 @@ public class ScoreScript : MonoBehaviour
 
         originalScale = scoreText.rectTransform.localScale;
         originalRotation = scoreText.rectTransform.localRotation;
+        previousPlayerY = player.position.y;
     }
 
     void Update()
     {
-        if (player.position.y > maxHeightReached)
+        float currentY = player.position.y;
+        float deltaY = currentY - previousPlayerY;
+
+        if (deltaY > 0f)
         {
-            maxHeightReached = player.position.y;
-            int newScore = Mathf.FloorToInt(maxHeightReached * heightMultiplier) * scoreMultiplier;
-            if (newScore > actualScore)
+            int gained = Mathf.FloorToInt(deltaY * heightMultiplier) * scoreMultiplier;
+            if (gained > 0)
             {
-                actualScore = newScore;
+                actualScore += gained;
                 OnScoreUpdate();
             }
         }
+
+        previousPlayerY = currentY;
 
         // Smooth score interpolation
         if (displayedScore < actualScore)
@@ -81,4 +87,6 @@ public class ScoreScript : MonoBehaviour
             soundTimer = soundCooldown;
         }
     }
+
+    public int GetScore() => actualScore;
 }
