@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class ScoreScript : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class ScoreScript : MonoBehaviour
     [SerializeField] private float starScaleSpeed = 8f;
     [SerializeField] private float starRotationShakeAngle = 15f;
     [SerializeField] private float starRotationLerpSpeed = 8f;
+    [SerializeField] private GameObject starEffect;
+    [SerializeField] private GameObject lightningEffect;
 
     [Header("Bonus")]
     public bool isInSpace = false;
@@ -139,19 +142,23 @@ public class ScoreScript : MonoBehaviour
     {
         if (!isInSpace)
         {
-            Debug.Log("Boost ignoré : pas en espace.");
+            Debug.Log("Boost ignorï¿½ : pas en espace.");
             return;
         }
 
         bonusMultiplier = 2f;
         bonusDuration = 5f;
-        Debug.Log("Boost éclair activé !");
+        Debug.Log("Boost ï¿½clair activï¿½ !");
+        
+        GameObject thisEffect = Instantiate(this.lightningEffect);
+        thisEffect.transform.position = player.position;
+        thisEffect.GetComponent<ParticleSystem>().Play();
     }
 
     public void ActivateStarBoost()
     {
         starBonusMultiplier += 0.10f;
-        Debug.Log($"Boost étoile  x{starBonusMultiplier:F2}");
+        Debug.Log($"Boost ï¿½toile  x{starBonusMultiplier:F2}");
 
         UpdateStarMultiplierDisplay();
 
@@ -159,6 +166,10 @@ public class ScoreScript : MonoBehaviour
         starMultiplierText.rectTransform.localScale = starPunchScale;
         float randomAngle = Random.Range(-starRotationShakeAngle, starRotationShakeAngle);
         starMultiplierText.rectTransform.localRotation = Quaternion.Euler(0f, 0f, randomAngle);
+        
+        GameObject thisEffect = Instantiate(this.starEffect);
+        thisEffect.transform.position = player.position;
+        thisEffect.GetComponent<ParticleSystem>().Play();
     }
 
     void UpdateStarMultiplierDisplay()
