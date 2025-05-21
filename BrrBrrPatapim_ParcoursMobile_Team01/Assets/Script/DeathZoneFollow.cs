@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DeathZoneFollow : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class DeathZoneFollow : MonoBehaviour
 
     [Header("Dépassement")]
     [SerializeField] private float maxOvershoot = 100f;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private UnityEvent OnGameOver;
+
 
     private bool isAllowedToRise = false;
 
@@ -87,7 +92,8 @@ public class DeathZoneFollow : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player entered the death zone.");
+            audioSource.Play();
+            OnGameOver.Invoke();
         }
     }
 
