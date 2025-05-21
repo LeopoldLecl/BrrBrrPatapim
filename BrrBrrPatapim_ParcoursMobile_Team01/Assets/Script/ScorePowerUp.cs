@@ -7,20 +7,31 @@ public class ScorePowerUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Essaye de trouver le ScoreScript sur le joueur
+        // Vérifie que le tag est "Player"
+        if (!other.CompareTag("Player")) return;
+
+        // Essaye de récupérer le ScoreScript dans l'objet ou ses enfants
         ScoreScript scoreScript = other.GetComponentInChildren<ScoreScript>();
-        if (scoreScript == null) return;
+        if (scoreScript == null)
+        {
+            Debug.LogWarning(" Aucun ScoreScript trouvé sur l'objet avec le tag Player.");
+            return;
+        }
 
         switch (type)
         {
             case PowerUpType.Lightning:
+                Debug.Log(" Éclair ramassé !");
                 scoreScript.ActivateLightningBoost();
                 break;
+
             case PowerUpType.Star:
+                Debug.Log(" Étoile ramassée !");
                 scoreScript.ActivateStarBoost();
                 break;
         }
 
-        Destroy(gameObject); // Supprime le power-up une fois ramassé
+        gameObject.SetActive(false); 
+
     }
 }
