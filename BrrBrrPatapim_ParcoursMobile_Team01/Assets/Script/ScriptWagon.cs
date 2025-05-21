@@ -1,8 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.Events;
 using UnityEngine.Serialization;
 using static GameplayEnums;
 
@@ -26,8 +26,7 @@ public class ScriptWagon : MonoBehaviour
     [SerializeField] private AudioClip screamSound;
     [SerializeField] private ParticleSystem skidParticles;
     [SerializeField] private float screamThreshold = 1f;
-
-
+    [SerializeField] private List<ParticleSystem> extraParticles;
 
     private List<Transform> _wagonsList = new List<Transform>();
     private List<Vector3> _positionHistory = new List<Vector3>();
@@ -78,16 +77,13 @@ public class ScriptWagon : MonoBehaviour
                 RotateToX(targetRotationX);
                 _currentTargetRotationX = targetRotationX;
 
-
-                if (skidParticles)
-                    skidParticles.Play();
+                if (skidParticles) skidParticles.Play();
+                PlayAllParticles();
             }
         }
 
-        // Move forward
         transform.Translate(Vector3.back * speed * Time.deltaTime);
 
-        // Check descent scream
         if (!_isBoosting)
         {
             if (targetRotationX < 0f)
@@ -98,7 +94,6 @@ public class ScriptWagon : MonoBehaviour
                     _isDescending = true;
                     if (screamSource && screamSound && !screamSource.isPlaying)
                         screamSource.PlayOneShot(screamSound);
-
                 }
             }
             else
@@ -189,7 +184,7 @@ public class ScriptWagon : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator BoostToY(float targetY, float direction)
+    private IEnumerator BoostToY(float targetY, float direction)
     {
         _isBoosting = true;
         float originalSpeed = speed;
@@ -221,5 +216,18 @@ public class ScriptWagon : MonoBehaviour
         _isBoosting = false;
         _boostParticleSystem?.Stop();
         RotateToX(Input.touchCount > 0 ? 45f : -45f);
+    }
+
+    public void PlayAllParticles()
+    {
+        if (extraParticles == null || extraParticles.Count == 0) return;
+
+        foreach (var particle in extraParticles)
+        {
+            if (particle != null)
+            {
+                particle.Play();
+            }
+        }
     }
 }
