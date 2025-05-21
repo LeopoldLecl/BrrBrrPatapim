@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Unity.Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -48,5 +49,11 @@ public class CanvasManager : MonoBehaviour
         {
             Debug.LogWarning("EndGameCamera non assignée !");
         }
+    }
+
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
