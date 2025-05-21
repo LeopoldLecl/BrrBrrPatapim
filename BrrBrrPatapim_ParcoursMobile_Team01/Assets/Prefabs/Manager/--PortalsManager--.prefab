@@ -51,9 +51,9 @@ MonoBehaviour:
   - {fileID: 1104783079848766885, guid: ec698bc883cb2e04aa2dbd81bfe57451, type: 3}
   - {fileID: 4683650243617651679, guid: 48a2e141a3fcd7e46a64f9b7c6ba6a02, type: 3}
   player: {fileID: 0}
-  spawnDistanceAhead: 20
+  spawnDistanceAhead: 25
   minY: -10
-  maxY: 20
+  maxY: 40
   despawnDistanceBehind: 10
   poolSize: 10
   spawnInterval: 0.8
