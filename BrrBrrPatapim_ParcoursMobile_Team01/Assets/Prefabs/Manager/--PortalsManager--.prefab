@@ -48,10 +48,12 @@ MonoBehaviour:
   - {fileID: 2053424930406802441, guid: 54896ce2813b33047b499b4da7a6acaf, type: 3}
   - {fileID: 4968624702978684949, guid: 2501fb5b7f9d2074a883a35038cd22f6, type: 3}
   - {fileID: 4968624702978684949, guid: e5563f08d9dc78140876c908f102bd94, type: 3}
+  - {fileID: 1104783079848766885, guid: ec698bc883cb2e04aa2dbd81bfe57451, type: 3}
+  - {fileID: 4683650243617651679, guid: 48a2e141a3fcd7e46a64f9b7c6ba6a02, type: 3}
   player: {fileID: 0}
   spawnDistanceAhead: 20
   minY: -10
   maxY: 20
   despawnDistanceBehind: 10
   poolSize: 10
-  spawnInterval: 1
+  spawnInterval: 0.8

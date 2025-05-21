@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using static GameplayEnums;
 
@@ -21,10 +22,12 @@ public class ScriptWagon : MonoBehaviour
     [SerializeField] private KeyCode rotateButton = KeyCode.Space;
 
     [Header("Audio & FX")]
-    [SerializeField] private AudioSource skidAudioSource;
-    [SerializeField] private AudioSource screamAudioSource;
+    [SerializeField] private AudioSource screamSource;
+    [SerializeField] private AudioClip screamSound;
     [SerializeField] private ParticleSystem skidParticles;
     [SerializeField] private float screamThreshold = 1f;
+
+
 
     private List<Transform> _wagonsList = new List<Transform>();
     private List<Vector3> _positionHistory = new List<Vector3>();
@@ -75,19 +78,16 @@ public class ScriptWagon : MonoBehaviour
                 RotateToX(targetRotationX);
                 _currentTargetRotationX = targetRotationX;
 
-                // Crissement + particules
-                if (skidAudioSource && !skidAudioSource.isPlaying)
-                    skidAudioSource.Play();
 
                 if (skidParticles)
                     skidParticles.Play();
             }
         }
 
-        // Mouvement vers l’avant
+        // Move forward
         transform.Translate(Vector3.back * speed * Time.deltaTime);
 
-        // Cri après descente prolongée
+        // Check descent scream
         if (!_isBoosting)
         {
             if (targetRotationX < 0f)
@@ -96,8 +96,9 @@ public class ScriptWagon : MonoBehaviour
                 if (_descentTimer >= screamThreshold && !_isDescending)
                 {
                     _isDescending = true;
-                    if (screamAudioSource)
-                        screamAudioSource.Play();
+                    if (screamSource && screamSound && !screamSource.isPlaying)
+                        screamSource.PlayOneShot(screamSound);
+
                 }
             }
             else
