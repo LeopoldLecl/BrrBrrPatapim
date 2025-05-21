@@ -1633,8 +1633,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: af240f9e8d63f854f97157cf25268fac, type: 3}
-  m_Resource: {fileID: 8300000, guid: af240f9e8d63f854f97157cf25268fac, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 00d6c9f2254d13a48b3b13ad37da11e6, type: 3}
+  m_Resource: {fileID: 8300000, guid: 00d6c9f2254d13a48b3b13ad37da11e6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.038
   m_Pitch: 1
@@ -2057,7 +2057,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903805294}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 989b6a46ac510614b810e974bf6b9741, type: 3}
@@ -2208,6 +2208,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: af240f9e8d63f854f97157cf25268fac, type: 3}
     - target: {fileID: 3886019010097480594, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
+      propertyPath: skidVolume
+      value: 0.164
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886019010097480594, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1658196870}
@@ -2215,6 +2219,14 @@ PrefabInstance:
       propertyPath: screamSound
       value: 
       objectReference: {fileID: 8300000, guid: 94578161c5842a841b84c32bd67e1f42, type: 3}
+    - target: {fileID: 3886019010097480594, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
+      propertyPath: screamSource
+      value: 
+      objectReference: {fileID: 1658196870}
+    - target: {fileID: 3886019010097480594, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
+      propertyPath: screamVolume
+      value: 0.044
+      objectReference: {fileID: 0}
     - target: {fileID: 3886019010097480594, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
       propertyPath: screamThreshold
       value: 0.2
@@ -2253,6 +2265,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1740098683392325173, guid: 622a3b17873303e409ce1ae7a83f964d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 804
+      objectReference: {fileID: 0}
     - target: {fileID: 2675506367620102234, guid: 622a3b17873303e409ce1ae7a83f964d, type: 3}
       propertyPath: m_Name
       value: --EnvironementManager--
