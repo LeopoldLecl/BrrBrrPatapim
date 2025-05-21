@@ -18,12 +18,18 @@ public class ScoreScript : MonoBehaviour
     [SerializeField] private float rotationLerpSpeed = 6f;
     [SerializeField] private float soundCooldown = 0.2f;
 
+    [Header("Bonus")]
+    public bool isInSpace = false;
+
+    private float bonusMultiplier = 1f;
+    private float bonusDuration = 0f;
+    private float starBonusMultiplier = 1f;
+
     private int displayedScore = 0;
     private int actualScore = 0;
     private Vector3 originalScale;
     private Quaternion originalRotation;
     private float soundTimer = 0f;
-
     private float previousPlayerY;
 
     void Start()
@@ -42,6 +48,8 @@ public class ScoreScript : MonoBehaviour
 
     void Update()
     {
+        UpdateBonusTimers();
+
         float currentY = player.position.y;
         float deltaY = currentY - previousPlayerY;
 
@@ -50,7 +58,8 @@ public class ScoreScript : MonoBehaviour
             int gained = Mathf.FloorToInt(deltaY * heightMultiplier) * scoreMultiplier;
             if (gained > 0)
             {
-                actualScore += gained;
+                float finalMultiplier = bonusMultiplier * starBonusMultiplier;
+                actualScore += Mathf.FloorToInt(gained * finalMultiplier);
                 OnScoreUpdate();
             }
         }
@@ -86,6 +95,31 @@ public class ScoreScript : MonoBehaviour
             audioSource.PlayOneShot(scorePopSFX);
             soundTimer = soundCooldown;
         }
+    }
+
+    private void UpdateBonusTimers()
+    {
+        if (bonusDuration > 0f)
+        {
+            bonusDuration -= Time.deltaTime;
+            if (bonusDuration <= 0f)
+            {
+                bonusMultiplier = 1f;
+            }
+        }
+    }
+
+    public void ActivateLightningBoost()
+    {
+        if (!isInSpace) return;
+
+        bonusMultiplier = 2f;
+        bonusDuration = 5f;
+    }
+
+    public void ActivateStarBoost()
+    {
+        starBonusMultiplier += 0.10f;
     }
 
     public int GetScore() => actualScore;
