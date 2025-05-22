@@ -2674,6 +2674,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 976892741}
+    - target: {fileID: 2100895690571112468, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: 'playerNames.Array.data[36]'
+      value: LinganGouligouliwatcha
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100895690571112468, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: 'playerNames.Array.data[47]'
+      value: Leokrotte92
+      objectReference: {fileID: 0}
     - target: {fileID: 4149434550729800267, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
