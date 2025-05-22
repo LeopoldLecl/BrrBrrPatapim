@@ -11,6 +11,10 @@ public class ScoreScript : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip scorePopSFX;
 
+    [Header("Boost Sounds")]
+    [SerializeField] private AudioSource lightningAudioSource;
+    [SerializeField] private AudioSource starAudioSource;
+
     [Header("Juice Settings")]
     [SerializeField] private float heightMultiplier = 10f;
     [SerializeField] private int scoreMultiplier = 1;
@@ -50,7 +54,7 @@ public class ScoreScript : MonoBehaviour
 
     private Vector3 starOriginalScale;
     private Quaternion starOriginalRotation;
-    
+
     public int DisplayedScore => displayedScore;
 
     void Start()
@@ -144,14 +148,17 @@ public class ScoreScript : MonoBehaviour
     {
         if (!isInSpace)
         {
-            Debug.Log("Boost ignor� : pas en espace.");
+            Debug.Log("Boost ignoré : pas en espace.");
             return;
         }
 
         bonusMultiplier = 2f;
         bonusDuration = 5f;
-        Debug.Log("Boost �clair activ� !");
-        
+        Debug.Log("Boost éclair activé !");
+
+        if (lightningAudioSource != null)
+            lightningAudioSource.Play();
+
         GameObject thisEffect = Instantiate(this.lightningEffect);
         thisEffect.transform.position = player.position;
         thisEffect.GetComponent<ParticleSystem>().Play();
@@ -160,15 +167,18 @@ public class ScoreScript : MonoBehaviour
     public void ActivateStarBoost()
     {
         starBonusMultiplier += 0.10f;
-        Debug.Log($"Boost �toile  x{starBonusMultiplier:F2}");
+        Debug.Log($"Boost étoile  x{starBonusMultiplier:F2}");
 
         UpdateStarMultiplierDisplay();
+
+        if (starAudioSource != null)
+            starAudioSource.Play();
 
         // Juicy feedback
         starMultiplierText.rectTransform.localScale = starPunchScale;
         float randomAngle = Random.Range(-starRotationShakeAngle, starRotationShakeAngle);
         starMultiplierText.rectTransform.localRotation = Quaternion.Euler(0f, 0f, randomAngle);
-        
+
         GameObject thisEffect = Instantiate(this.starEffect);
         thisEffect.transform.position = player.position;
         thisEffect.GetComponent<ParticleSystem>().Play();
