@@ -6,15 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0d0776fe-eb91-4e7d-ae76-77465e9ebfd4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BrrBrrPatapim_ParcoursMobile_Team01/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BrrBrrPatapim_ParcoursMobile_Team01/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Fonts/Honk-Regular-VariableFont_MORF,SHLN SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/Honk-Regular-VariableFont_MORF,SHLN SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Black SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Black SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Bold SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Regular SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Regular SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Portal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Portal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/ScoreScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/ScoreScript.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/Mobile_RPAsset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Mobile_RPAsset.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/EndGameScores.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EndGameScores.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

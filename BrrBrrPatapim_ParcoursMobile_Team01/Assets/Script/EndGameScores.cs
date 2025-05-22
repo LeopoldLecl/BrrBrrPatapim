@@ -11,6 +11,15 @@ public class EndGameScores : MonoBehaviour
     [SerializeField] private List<string> playerNames = new List<string>();
     public List<LeaderboardEntry> leaderboard = new List<LeaderboardEntry>();
     
+    [SerializeField] private TextMeshProUGUI firstPlayerName;
+    [SerializeField] private TextMeshProUGUI secondPlayerName;
+    [SerializeField] private TextMeshProUGUI thirdPlayerName;
+    [SerializeField] private TextMeshProUGUI fourthPlayerName;
+
+    private void Start()
+    {
+        //GenerateLeaderboard(50000);
+    }
 
     public void GenerateLeaderboard(int playerScore)
     {
@@ -21,13 +30,19 @@ public class EndGameScores : MonoBehaviour
         while (fakeNames.Count < 9)
             fakeNames.Add("Bot" + (fakeNames.Count + 1));
 
-        // Generate 4 lower and 5 higher fake scores around the player's score
+        // Generate 4 lower and 5 higher fake scores around the player's score, clamped to 0
         List<int> fakeScores = new List<int>();
         int baseScore = playerScore;
         for (int i = 4; i > 0; i--)
-            fakeScores.Add(baseScore - Random.Range(500, 5000) * i);
+        {
+            int score = baseScore - Random.Range(500, 5000) * i;
+            fakeScores.Add(Mathf.Max(0, score));
+        }
         for (int i = 1; i <= 5; i++)
-            fakeScores.Add(baseScore + Random.Range(500, 5000) * i);
+        {
+            int score = baseScore + Random.Range(500, 5000) * i;
+            fakeScores.Add(Mathf.Max(0, score));
+        }
 
         // Shuffle fake names for randomness
         for (int i = fakeNames.Count - 1; i > 0; i--)
@@ -49,9 +64,15 @@ public class EndGameScores : MonoBehaviour
         for (int i = 4; i < 9; i++)
             leaderboard.Add(new LeaderboardEntry(fakeNames[i], fakeScores[i]));
 
-        // Optionally, sort descending
+        // Sort descending
         leaderboard.Sort((a, b) => b.score.CompareTo(a.score));
-        
+
+        // Set the top four player names
+        firstPlayerName.text = leaderboard.Count > 0 ? leaderboard[0].playerName : "";
+        secondPlayerName.text = leaderboard.Count > 1 ? leaderboard[1].playerName : "";
+        thirdPlayerName.text = leaderboard.Count > 2 ? leaderboard[2].playerName : "";
+        fourthPlayerName.text = leaderboard.Count > 3 ? leaderboard[3].playerName : "";
+
         DisplayLeaderboard();
     }
     
