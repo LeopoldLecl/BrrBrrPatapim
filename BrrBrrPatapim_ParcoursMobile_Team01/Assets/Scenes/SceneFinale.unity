@@ -2409,9 +2409,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 976892742}
     - target: {fileID: 6578408851709591429, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
+      propertyPath: catchUpSpeed
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578408851709591429, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
       propertyPath: endGameScores
       value: 
       objectReference: {fileID: 1282133938}
+    - target: {fileID: 6578408851709591429, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
+      propertyPath: overshootSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578408851709591429, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
+      propertyPath: verticalOffset
+      value: -30
+      objectReference: {fileID: 0}
     - target: {fileID: 6578408851709591429, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
       propertyPath: OnGameOver.m_PersistentCalls.m_Calls.Array.size
       value: 1
