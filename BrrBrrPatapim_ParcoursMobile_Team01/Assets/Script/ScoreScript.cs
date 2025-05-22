@@ -50,6 +50,8 @@ public class ScoreScript : MonoBehaviour
 
     private Vector3 starOriginalScale;
     private Quaternion starOriginalRotation;
+    
+    public int DisplayedScore => displayedScore;
 
     void Start()
     {

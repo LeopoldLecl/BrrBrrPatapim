@@ -51,13 +51,10 @@ public class Portal : MonoBehaviour
         switch(portalType) 
         {
             case PortalType.GREEN:
-                Debug.Log("Green portal entered");
                 break;
             case PortalType.RED:
-                Debug.Log("Red portal entered");
                 break;
             case PortalType.AD:
-                Debug.Log("Ad portal entered");
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
