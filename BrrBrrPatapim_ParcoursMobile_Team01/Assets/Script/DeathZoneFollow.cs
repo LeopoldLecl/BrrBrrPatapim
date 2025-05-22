@@ -16,7 +16,10 @@ public class DeathZoneFollow : MonoBehaviour
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private UnityEvent OnGameOver;
+    
+    [SerializeField] private EndGameScores endGameScores;
 
+    private int playerScore;
 
     private bool isAllowedToRise = false;
 
@@ -94,6 +97,8 @@ public class DeathZoneFollow : MonoBehaviour
         {
             audioSource.Play();
             OnGameOver.Invoke();
+            playerScore = ScriptWagon.Instance.gameObject.GetComponentInChildren<ScoreScript>().DisplayedScore; 
+            endGameScores.GenerateLeaderboard(playerScore);
         }
     }
 

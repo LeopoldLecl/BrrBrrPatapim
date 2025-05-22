@@ -6,14 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="0d0776fe-eb91-4e7d-ae76-77465e9ebfd4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BrrBrrPatapim_ParcoursMobile_Team01/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BrrBrrPatapim_ParcoursMobile_Team01/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Fonts/Honk-Regular-VariableFont_MORF,SHLN SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/Honk-Regular-VariableFont_MORF,SHLN SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Black SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Black SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Bold SDF.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Regular SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/PassionOne-Regular SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/VFX_Klaus/Prefabs/Hyper Casual FX/HCFX_Energy_05.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/VFX_Klaus/Prefabs/Hyper Casual FX/HCFX_Energy_05.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Eclair.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Eclair.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Etoile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Etoile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MainWagon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MainWagon.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SceneFinale.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SceneFinale.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/ScorePowerUp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/ScorePowerUp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Portal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Portal.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/ScoreScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/ScoreScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/Mobile_RPAsset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Mobile_RPAsset.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,13 +91,15 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="8476">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="8476" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list />
+        <list>
+          <MonoRuntime />
+        </list>
       </option>
       <option name="selectedOptions">
         <list />
