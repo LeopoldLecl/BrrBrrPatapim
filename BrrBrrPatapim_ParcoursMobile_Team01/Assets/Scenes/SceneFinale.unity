@@ -2796,7 +2796,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 431036967749168506, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
       propertyPath: m_Pitch
-      value: 0.81
+      value: 0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 431036967749168506, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 431036967749168506, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6578408851709591429, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
       propertyPath: player

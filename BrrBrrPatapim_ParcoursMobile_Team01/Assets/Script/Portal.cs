@@ -8,26 +8,30 @@ public class Portal : MonoBehaviour
 {
     [OnValueChanged("ChangeMaterialAndValues")]
     [SerializeField] private PortalType portalType;
-    
+
     [SerializeField] private GameObject portalPlane;
-    
+
+    [Header("Materials")]
     [SerializeField] private Material RedPortalMaterial;
     [SerializeField] private Material GreenPortalMaterial;
     [SerializeField] private Material AdPortalMaterial;
-    
-    [SerializeField] TextMeshPro portalValue;
 
+    [Header("UI")]
+    [SerializeField] private TextMeshPro portalValue;
+
+    [Header("Portal Value Range")]
     [SerializeField] private int minValue;
     [SerializeField] private int maxValue;
 
-    private int value;
-    
-    public int Value
-    {
-        get => value;
-    }
+    [Header("Portal Sounds")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip redSound;
+    [SerializeField] private AudioClip greenSound;
+    [SerializeField] private AudioClip adSound;
 
-    
+    private int value;
+    public int Value => value;
+
     private void Start()
     {
         RandomizePortalType();
@@ -38,33 +42,43 @@ public class Portal : MonoBehaviour
     {
         PortalType[] weightedTypes = new PortalType[]
         {
-            PortalType.RED, PortalType.RED, PortalType.RED, PortalType.RED,PortalType.RED, PortalType.RED, PortalType.RED, PortalType.RED,
-            PortalType.GREEN, PortalType.GREEN, PortalType.GREEN, PortalType.GREEN,PortalType.GREEN, PortalType.GREEN, PortalType.GREEN, PortalType.GREEN,
-            PortalType.AD // Assuming AD is your "blue" portal
+            PortalType.RED, PortalType.RED, PortalType.RED, PortalType.RED,
+            PortalType.RED, PortalType.RED, PortalType.RED, PortalType.RED,
+            PortalType.GREEN, PortalType.GREEN, PortalType.GREEN, PortalType.GREEN,
+            PortalType.GREEN, PortalType.GREEN, PortalType.GREEN, PortalType.GREEN,
+            PortalType.AD
         };
         portalType = weightedTypes[UnityEngine.Random.Range(0, weightedTypes.Length)];
     }
-    
-    
+
     private void OnTriggerEnter(Collider other)
     {
-        switch(portalType) 
+        //  Ignore everything except tagged "Player"
+        if (!other.CompareTag("Player")) return;
+
+        // Play corresponding sound
+        if (audioSource != null)
         {
-            case PortalType.GREEN:
-                break;
-            case PortalType.RED:
-                break;
-            case PortalType.AD:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            switch (portalType)
+            {
+                case PortalType.GREEN:
+                    if (greenSound) audioSource.PlayOneShot(greenSound);
+                    break;
+                case PortalType.RED:
+                    if (redSound) audioSource.PlayOneShot(redSound);
+                    break;
+                case PortalType.AD:
+                    if (adSound) audioSource.PlayOneShot(adSound);
+                    break;
+            }
         }
+
         other.GetComponent<ScriptWagon>()?.OnPortalTouched(portalType, Value);
     }
 
     private void ChangeMaterialAndValues()
     {
-        switch(portalType) 
+        switch (portalType)
         {
             case PortalType.GREEN:
                 portalPlane.GetComponent<Renderer>().material = GreenPortalMaterial;
@@ -77,17 +91,17 @@ public class Portal : MonoBehaviour
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
-        }  
-        
+        }
+
         CalculatePortalValue();
     }
-    
+
     private void CalculatePortalValue()
     {
         value = UnityEngine.Random.Range(minValue, maxValue);
         string sign;
 
-        switch(portalType)
+        switch (portalType)
         {
             case PortalType.GREEN:
                 sign = "+";
@@ -103,7 +117,6 @@ public class Portal : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
 
-        // Concatenate sign and value
         portalValue.text = $"{sign}{value}";
     }
 }
