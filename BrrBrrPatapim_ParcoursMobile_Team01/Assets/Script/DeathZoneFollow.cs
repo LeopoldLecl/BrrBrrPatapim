@@ -96,9 +96,9 @@ public class DeathZoneFollow : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             audioSource.Play();
-            OnGameOver.Invoke();
             playerScore = ScriptWagon.Instance.gameObject.GetComponentInChildren<ScoreScript>().DisplayedScore; 
             endGameScores.GenerateLeaderboard(playerScore);
+            OnGameOver.Invoke();
         }
     }
 

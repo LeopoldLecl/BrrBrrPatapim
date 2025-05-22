@@ -16,13 +16,16 @@ public class EndGameScores : MonoBehaviour
     [SerializeField] private TextMeshProUGUI thirdPlayerName;
     [SerializeField] private TextMeshProUGUI fourthPlayerName;
 
-    private void Start()
-    {
-        //GenerateLeaderboard(50000);
-    }
-
     public void GenerateLeaderboard(int playerScore)
     {
+        // Highscore check and update
+        int highscore = PlayerPrefs.GetInt("highscore", 0);
+        if (playerScore > highscore)
+        {
+            PlayerPrefs.SetInt("highscore", playerScore);
+            PlayerPrefs.Save();
+        }
+        
         leaderboard.Clear();
 
         // Ensure we have at least 9 fake names
