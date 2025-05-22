@@ -642,6 +642,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 731245418}
+    - target: {fileID: 4670892408758143803, guid: 41d78a50c8a45364d93937df2ff00199, type: 3}
+      propertyPath: portalsList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6319867259557527523, guid: 41d78a50c8a45364d93937df2ff00199, type: 3}
       propertyPath: m_Name
       value: --PortalsManager--
@@ -2807,6 +2811,83 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c157bce744f1c34896b5396ccdd5995, type: 3}
+--- !u!1001 &7862508746653085396
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 117463698163728498, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 765.291
+      objectReference: {fileID: 0}
+    - target: {fileID: 117463698163728498, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1020.9507
+      objectReference: {fileID: 0}
+    - target: {fileID: 117463698163728498, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 66.08533
+      objectReference: {fileID: 0}
+    - target: {fileID: 117463698163728498, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 117463698163728498, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 117463698163728498, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 117463698163728498, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 117463698163728498, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 117463698163728498, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 117463698163728498, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 338859725603529575, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: m_Name
+      value: --PowerupsManager--
+      objectReference: {fileID: 0}
+    - target: {fileID: 7628284047144029803, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: maxY
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7628284047144029803, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: minY
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7628284047144029803, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 731245418}
+    - target: {fileID: 7628284047144029803, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: spawnInterval
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7628284047144029803, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
+      propertyPath: spawnDistanceAhead
+      value: 25
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
 --- !u!114 &7988928122368948876 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7128923628638676487, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
@@ -2985,6 +3066,7 @@ SceneRoots:
   - {fileID: 6955752632975317053}
   - {fileID: 1234341716}
   - {fileID: 731875885}
+  - {fileID: 7862508746653085396}
   - {fileID: 2331306203792850765}
   - {fileID: 7830987139185724681}
   - {fileID: 2906912097949158463}
