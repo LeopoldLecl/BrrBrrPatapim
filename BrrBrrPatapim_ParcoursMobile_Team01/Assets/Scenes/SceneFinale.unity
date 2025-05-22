@@ -2676,7 +2676,19 @@ PrefabInstance:
       objectReference: {fileID: 976892741}
     - target: {fileID: 2100895690571112468, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
       propertyPath: 'playerNames.Array.data[36]'
-      value: LinganGouligouliwatcha
+      value: Lingan
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100895690571112468, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: 'playerNames.Array.data[37]'
+      value: Goulilgouli
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100895690571112468, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: 'playerNames.Array.data[38]'
+      value: WatchaLingan
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100895690571112468, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: 'playerNames.Array.data[39]'
+      value: Gou
       objectReference: {fileID: 0}
     - target: {fileID: 2100895690571112468, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
       propertyPath: 'playerNames.Array.data[47]'
