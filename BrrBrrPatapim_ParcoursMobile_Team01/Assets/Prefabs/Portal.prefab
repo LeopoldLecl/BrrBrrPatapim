@@ -145,7 +145,7 @@ MonoBehaviour:
   minValue: 5
   maxValue: 50
   audioSource: {fileID: 6665355774118773268}
-  redSound: {fileID: 8300000, guid: 362909f6012a4104580c18e0c18200e9, type: 3}
+  redSound: {fileID: 8300000, guid: f07b5be2ff391144593427171694c3a9, type: 3}
   greenSound: {fileID: 8300000, guid: 61304e2c40844924880aef9cbe3896d9, type: 3}
   adSound: {fileID: 8300000, guid: 94578161c5842a841b84c32bd67e1f42, type: 3}
 --- !u!54 &433517418960209496
