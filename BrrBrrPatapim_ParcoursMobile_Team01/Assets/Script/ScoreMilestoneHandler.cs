@@ -8,6 +8,7 @@ public class ScoreMilestoneHandler : MonoBehaviour
         public int requiredScore = 300000;
         public GameObject toDisable;
         public GameObject toEnable;
+        public Material skyboxToApply;
         [HideInInspector] public bool triggered = false;
     }
 
@@ -30,6 +31,9 @@ public class ScoreMilestoneHandler : MonoBehaviour
 
                 if (milestone.toEnable != null)
                     milestone.toEnable.SetActive(true);
+
+                if (milestone.skyboxToApply != null)
+                    RenderSettings.skybox = milestone.skyboxToApply;
 
                 milestone.triggered = true;
             }
