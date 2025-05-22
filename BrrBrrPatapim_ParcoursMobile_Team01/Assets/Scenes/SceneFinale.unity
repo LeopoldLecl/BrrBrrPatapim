@@ -638,6 +638,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 731245418}
     - target: {fileID: 4670892408758143803, guid: 41d78a50c8a45364d93937df2ff00199, type: 3}
+      propertyPath: spawnInterval
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670892408758143803, guid: 41d78a50c8a45364d93937df2ff00199, type: 3}
       propertyPath: portalsList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1567,7 +1571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363407448}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.06315258, y: 0.46007618, z: 0.032829694, w: 0.885022}
+  m_LocalRotation: {x: -0.06323672, y: 0.45780104, z: 0.03266735, w: 0.886201}
   m_LocalPosition: {x: -8.34, y: 2.48, z: -7.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1663,7 +1667,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1496035402}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.023379974, y: -0.024427954, z: -0.0005714517, w: 0.99942803}
+  m_LocalRotation: {x: -0.023378449, y: -0.026995359, z: -0.00063151255, w: 0.999362}
   m_LocalPosition: {x: -406.14, y: 153.68, z: -109.81767}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1839,7 +1843,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811863876}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0014096356, y: -0.18980601, z: -0.00027251148, w: 0.9818206}
+  m_LocalRotation: {x: -0.0014099337, y: -0.18867049, z: -0.00027087796, w: 0.98203945}
   m_LocalPosition: {x: 196.82, y: 121.78, z: -43.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1934,7 +1938,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903805294}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0014096358, y: -0.18980601, z: -0.00027251145, w: 0.9818206}
+  m_LocalRotation: {x: -0.0014099338, y: -0.18867052, z: -0.00027087805, w: 0.98203945}
   m_LocalPosition: {x: 196.82, y: 121.78, z: -43.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2166,6 +2170,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3886019010097480594, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7128923628638676487, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
       propertyPath: scoreText
       value: 
@@ -2244,16 +2252,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7988928122368948876}
     - target: {fileID: 7959636478714684104, guid: 622a3b17873303e409ce1ae7a83f964d, type: 3}
+      propertyPath: milestones.Array.data[0].requiredScore
+      value: 350000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7959636478714684104, guid: 622a3b17873303e409ce1ae7a83f964d, type: 3}
       propertyPath: milestones.Array.data[0].skyboxToApply
       value: 
       objectReference: {fileID: 2100000, guid: 5726234f94346694a9dbed116ecbb221, type: 2}
+    - target: {fileID: 7959636478714684104, guid: 622a3b17873303e409ce1ae7a83f964d, type: 3}
+      propertyPath: milestones.Array.data[1].requiredScore
+      value: 750000
+      objectReference: {fileID: 0}
     - target: {fileID: 7959636478714684104, guid: 622a3b17873303e409ce1ae7a83f964d, type: 3}
       propertyPath: milestones.Array.data[1].skyboxToApply
       value: 
       objectReference: {fileID: 2100000, guid: 5726234f94346694a9dbed116ecbb221, type: 2}
     - target: {fileID: 7959636478714684104, guid: 622a3b17873303e409ce1ae7a83f964d, type: 3}
       propertyPath: milestones.Array.data[2].requiredScore
-      value: 900000
+      value: 1000000
       objectReference: {fileID: 0}
     - target: {fileID: 7959636478714684104, guid: 622a3b17873303e409ce1ae7a83f964d, type: 3}
       propertyPath: milestones.Array.data[2].skyboxToApply
@@ -2434,7 +2450,7 @@ PrefabInstance:
       objectReference: {fileID: 976892742}
     - target: {fileID: 6578408851709591429, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
       propertyPath: catchUpSpeed
-      value: 300
+      value: 340
       objectReference: {fileID: 0}
     - target: {fileID: 6578408851709591429, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
       propertyPath: endGameScores
@@ -2442,7 +2458,7 @@ PrefabInstance:
       objectReference: {fileID: 1282133938}
     - target: {fileID: 6578408851709591429, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
       propertyPath: overshootSpeed
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6578408851709591429, guid: ebbbe2192a4a3484480a4db85ce140cc, type: 3}
       propertyPath: verticalOffset
@@ -2652,7 +2668,7 @@ PrefabInstance:
       objectReference: {fileID: 731245418}
     - target: {fileID: 7628284047144029803, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
       propertyPath: spawnInterval
-      value: 3
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7628284047144029803, guid: 8efc90154316f1e4ea92e2811eaf16b7, type: 3}
       propertyPath: spawnDistanceAhead
