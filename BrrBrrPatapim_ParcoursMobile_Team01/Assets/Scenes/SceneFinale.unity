@@ -2353,7 +2353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363407448}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.063152574, y: 0.46007618, z: 0.03282969, w: 0.885022}
+  m_LocalRotation: {x: -0.063203596, y: 0.45869806, z: 0.032731354, w: 0.88573706}
   m_LocalPosition: {x: -8.34, y: 2.48, z: -7.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2506,7 +2506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1496035402}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.023379982, y: -0.02442795, z: -0.00057145185, w: 0.99942803}
+  m_LocalRotation: {x: -0.023379067, y: -0.025983522, z: -0.00060784194, w: 0.9993888}
   m_LocalPosition: {x: -406.14, y: 153.68, z: -109.81767}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2782,7 +2782,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811863876}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0014096359, y: -0.18980601, z: -0.0002725115, w: 0.9818206}
+  m_LocalRotation: {x: -0.0014098104, y: -0.1891179, z: -0.00027152037, w: 0.9819534}
   m_LocalPosition: {x: 196.82, y: 121.78, z: -43.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2877,7 +2877,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903805294}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.001409636, y: -0.18980601, z: -0.00027251148, w: 0.9818206}
+  m_LocalRotation: {x: -0.0014098107, y: -0.18911792, z: -0.00027152046, w: 0.9819534}
   m_LocalPosition: {x: 196.82, y: 121.78, z: -43.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3219,14 +3219,6 @@ PrefabInstance:
       propertyPath: milestones.Array.data[6].onMilestoneReached.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 972769633}
-    - target: {fileID: 7959636478714684104, guid: 622a3b17873303e409ce1ae7a83f964d, type: 3}
-      propertyPath: milestones.Array.data[6].onMilestoneReached.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Stop
-      objectReference: {fileID: 0}
-    - target: {fileID: 7959636478714684104, guid: 622a3b17873303e409ce1ae7a83f964d, type: 3}
-      propertyPath: milestones.Array.data[6].onMilestoneReached.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
