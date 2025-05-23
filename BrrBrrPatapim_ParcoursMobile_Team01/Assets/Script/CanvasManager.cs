@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using Unity.Cinemachine;
@@ -15,6 +16,29 @@ public class CanvasManager : MonoBehaviour
     [Header("Cinemachine")]
     [SerializeField] private CinemachineCamera gameplayCamera;
     [SerializeField] private CinemachineCamera endGameCamera;
+    
+    [SerializeField] TextMeshProUGUI highscoreText;
+
+    private void Start()
+    {
+        UpdateHighscoreText();
+    }
+
+    private void UpdateHighscoreText()
+    {
+        int highscore = PlayerPrefs.GetInt("highscore", 0);
+        if (highscoreText != null)
+        {
+            highscoreText.text = $"HighScore : {highscore}";
+        }
+    }
+    
+    public void ResetPlayerStatsAndReboot()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
     public void StartGame()
     {
@@ -24,7 +48,7 @@ public class CanvasManager : MonoBehaviour
         onStartGame.Invoke();
         PortalsManager.Instance.StartGame();
 
-        // S'assurer que la caméra de jeu est active au démarrage
+        // S'assurer que la camï¿½ra de jeu est active au dï¿½marrage
         if (gameplayCamera != null && endGameCamera != null)
         {
             gameplayCamera.Priority = 12;
@@ -38,16 +62,16 @@ public class CanvasManager : MonoBehaviour
         gameUI.SetActive(false);
         postGameUI.SetActive(true);
 
-        Debug.Log("Fin de jeu - Switch caméra");
+        Debug.Log("Fin de jeu - Switch camï¿½ra");
 
-        // Activer la caméra de fin avec priorité plus haute
+        // Activer la camï¿½ra de fin avec prioritï¿½ plus haute
         if (endGameCamera != null)
         {
             endGameCamera.Priority = 100;
         }
         else
         {
-            Debug.LogWarning("EndGameCamera non assignée !");
+            Debug.LogWarning("EndGameCamera non assignï¿½e !");
         }
     }
 

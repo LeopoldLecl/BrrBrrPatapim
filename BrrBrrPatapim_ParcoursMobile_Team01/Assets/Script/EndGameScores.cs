@@ -23,6 +23,13 @@ public class EndGameScores : MonoBehaviour
 
     public void GenerateLeaderboard(int playerScore)
     {
+        int highscore = PlayerPrefs.GetInt("highscore", 0);
+        if (playerScore > highscore)
+        {
+            PlayerPrefs.SetInt("highscore", playerScore);
+            PlayerPrefs.Save();
+        }
+        
         leaderboard.Clear();
 
         // Ensure we have at least 9 fake names
