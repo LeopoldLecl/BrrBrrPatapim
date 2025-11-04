@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4af13635be917474da4138a129e42ac6, type: 3}
-  m_Name: ShopItemScriptableObject
+  m_Name: 15_Matteoooooooooo
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemScriptableObject
-  itemIcon: {fileID: 21300008, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
-  itemPrice: 10
+  itemIcon: {fileID: 21300000, guid: ebeac004f9d70524c9465e9129d46a34, type: 3}
+  itemPrice: 250
+  id: 561571001c0240e38d1ad12ca0eda375
+  productId: 

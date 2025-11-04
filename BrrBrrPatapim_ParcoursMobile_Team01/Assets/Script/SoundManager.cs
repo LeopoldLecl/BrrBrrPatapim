@@ -64,9 +64,15 @@ public class SoundManager : MonoBehaviour
     private void RefreshAudioAndButton()
     {
         audioSources.Clear();
+#pragma warning disable 618
+#if UNITY_2023_1_OR_NEWER
+        audioSources.AddRange(Object.FindObjectsByType<AudioSource>(FindObjectsInactive.Include, FindObjectsSortMode.None));
+        var toggleButton = Object.FindFirstObjectByType<SoundToggleButton>(FindObjectsInactive.Include);
+#else
         audioSources.AddRange(FindObjectsOfType<AudioSource>());
-
         var toggleButton = FindObjectOfType<SoundToggleButton>();
+#endif
+#pragma warning restore 618
         soundButtonImage = toggleButton ? toggleButton.GetComponent<Image>() : null;
     }
 
