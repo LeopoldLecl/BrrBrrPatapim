@@ -14,6 +14,11 @@ public class ShopItemsWindow : EditorWindow
     private readonly List<ShopItemScriptableObject> _items = new();
     private SearchField _searchField;
 
+    // Auto-refresh controls
+    private bool _autoRefreshEnabled = true;
+    private float _autoRefreshInterval = 0.5f;
+    private double _nextAutoAt;
+
     [MenuItem("Tools/Shop/Shop Items Window")] 
     public static void Open()
     {
@@ -27,6 +32,38 @@ public class ShopItemsWindow : EditorWindow
     {
         if (_searchField == null) _searchField = new SearchField();
         RefreshList();
+        EditorApplication.update += OnEditorUpdate;
+        EditorApplication.hierarchyChanged += OnHierarchyChanged;
+        Undo.undoRedoPerformed += OnUndoRedo;
+        _nextAutoAt = EditorApplication.timeSinceStartup + _autoRefreshInterval;
+    }
+
+    private void OnDisable()
+    {
+        EditorApplication.update -= OnEditorUpdate;
+        EditorApplication.hierarchyChanged -= OnHierarchyChanged;
+        Undo.undoRedoPerformed -= OnUndoRedo;
+    }
+
+    private void OnHierarchyChanged()
+    {
+        // One-shot refresh shortly after hierarchy changes
+        EditorApplication.delayCall += () => RefreshAllShopItemsInScenes(true);
+    }
+
+    private void OnUndoRedo()
+    {
+        RefreshAllShopItemsInScenes(true);
+    }
+
+    private void OnEditorUpdate()
+    {
+        if (!_autoRefreshEnabled) return;
+        var now = EditorApplication.timeSinceStartup;
+        if (now < _nextAutoAt) return;
+        _nextAutoAt = now + Mathf.Max(0.1f, _autoRefreshInterval);
+        RefreshAllShopItemsInScenes(true);
+        // No Repaint spam; window will repaint on user interaction
     }
 
     private void OnGUI()
@@ -40,10 +77,20 @@ public class ShopItemsWindow : EditorWindow
 
             if (GUILayout.Button("Refresh All Shop Items", EditorStyles.toolbarButton))
             {
-                RefreshAllShopItemsInScenes();
+                RefreshAllShopItemsInScenes(false);
             }
 
             GUILayout.FlexibleSpace();
+
+            // Auto-refresh toolbar controls
+            _autoRefreshEnabled = GUILayout.Toggle(_autoRefreshEnabled, new GUIContent("Auto Refresh"), EditorStyles.toolbarButton, GUILayout.Width(100));
+            EditorGUIUtility.labelWidth = 60f;
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                _autoRefreshInterval = Mathf.Clamp(EditorGUILayout.FloatField("Every", _autoRefreshInterval, GUILayout.Width(140)), 0.1f, 10f);
+                GUILayout.Label("s", GUILayout.Width(12));
+            }
+
             if (_searchField == null) _searchField = new SearchField();
             _search = _searchField.OnToolbarGUI(_search, GUILayout.MaxWidth(300));
         }
@@ -87,6 +134,7 @@ public class ShopItemsWindow : EditorWindow
                             if (priceField != so.GetItemPrice()) so.SetItemPrice(priceField);
                             if (productField != so.GetProductId()) so.SetProductId(productField);
                             EditorUtility.SetDirty(so);
+                            RefreshShopItemsReferencing(so);
                         }
 
                         // Also handle thumbnail change
@@ -95,6 +143,7 @@ public class ShopItemsWindow : EditorWindow
                             Undo.RecordObject(so, "Change Item Icon");
                             so.SetItemIcon(newIcon);
                             EditorUtility.SetDirty(so);
+                            RefreshShopItemsReferencing(so);
                         }
 
                         using (new EditorGUILayout.HorizontalScope())
@@ -161,7 +210,7 @@ public class ShopItemsWindow : EditorWindow
 #endif
     }
 
-    private static void RefreshAllShopItemsInScenes()
+    private static void RefreshAllShopItemsInScenes(bool silent)
     {
         int count = 0;
         foreach (var si in FindAllShopItemsInScenes())
@@ -169,16 +218,20 @@ public class ShopItemsWindow : EditorWindow
             try
             {
                 si.ChangeValues();
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(si);
+#endif
                 count++;
             }
             catch { /* ignore */ }
         }
-        if (count > 0)
+        if (!silent && count > 0)
         {
+#if UNITY_EDITOR
             EditorSceneManager.MarkAllScenesDirty();
+#endif
+            Debug.Log($"ShopItemsWindow: Refreshed {count} ShopItem component(s) in open scene(s).");
         }
-        Debug.Log($"ShopItemsWindow: Refreshed {count} ShopItem component(s) in open scene(s).");
     }
 
     private static void RefreshShopItemsReferencing(ShopItemScriptableObject so)
@@ -195,17 +248,22 @@ public class ShopItemsWindow : EditorWindow
                 try
                 {
                     si.ChangeValues();
+#if UNITY_EDITOR
                     EditorUtility.SetDirty(si);
+#endif
                     count++;
                 }
                 catch { /* ignore */ }
             }
         }
+#if UNITY_EDITOR
         if (count > 0)
         {
             EditorSceneManager.MarkAllScenesDirty();
         }
-        Debug.Log($"ShopItemsWindow: Refreshed {count} ShopItem user(s) of '{so.name}'.");
+#endif
+        if (count > 0)
+            Debug.Log($"ShopItemsWindow: Refreshed {count} ShopItem user(s) of '{so.name}'.");
     }
 }
 #endif

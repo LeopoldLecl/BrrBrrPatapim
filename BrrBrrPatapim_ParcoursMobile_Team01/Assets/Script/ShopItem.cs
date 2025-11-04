@@ -3,7 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 using NaughtyAttributes;
 using Script; // for ShopUnlocksManager
-using Script.ScriptableObjects.Scripts; // for ShopItemScriptableObject
+using Script.ScriptableObjects.Scripts;
+using UnityEngine.Purchasing; // for ShopItemScriptableObject
 #if UNITY_PURCHASING
 using UnityEngine.Purchasing;
 #endif
@@ -165,6 +166,18 @@ public class ShopItem : MonoBehaviour
         ApplyStateToUI();
     }
 
+    public void OnIAPPurchaseComplete(Product product)
+    {
+        if (shopItemData == null) return;
+        if (isPurchased) { ApplyStateToUI(); return; }
+        // Optional: verify product.definition.id == shopItemData.GetProductId()
+        var id = shopItemData.GetItemId();
+        if (string.IsNullOrEmpty(id)) return;
+        ShopUnlocksManager.Unlock(id);
+        isPurchased = true;
+        ApplyStateToUI();
+    }
+    
 #if UNITY_PURCHASING
     // Hook this to IAPButton's On Purchase Complete (Product)
     public void OnIAPPurchaseComplete(Product product)

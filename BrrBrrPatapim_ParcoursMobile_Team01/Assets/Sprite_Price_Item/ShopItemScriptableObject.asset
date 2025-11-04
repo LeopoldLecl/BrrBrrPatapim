@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af13635be917474da4138a129e42ac6, type: 3}
   m_Name: ShopItemScriptableObject
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemScriptableObject
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300066, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
   itemPrice: 0
+  id: 2409ad549db747a2aac4d08b2ccefbbf
+  productId: 

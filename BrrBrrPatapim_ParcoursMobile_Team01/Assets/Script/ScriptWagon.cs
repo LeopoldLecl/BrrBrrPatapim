@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.Serialization;
 using static GameplayEnums;
 
 public class ScriptWagon : MonoBehaviour
@@ -31,13 +29,13 @@ public class ScriptWagon : MonoBehaviour
     private List<Transform> _wagonsList = new List<Transform>();
     private List<Vector3> _positionHistory = new List<Vector3>();
     private Tween _currentRotationTween;
-    private float _currentTargetRotationX = 0f;
+    private float _currentTargetRotationX;
     private ParticleSystem _boostParticleSystem;
 
-    private float _descentTimer = 0f;
-    private bool _isDescending = false;
-    private bool _isBoosting = false;
-    private bool _hasGameStarted = false;
+    private float _descentTimer;
+    private bool _isDescending;
+    private bool _isBoosting;
+    private bool _hasGameStarted;
 
     public bool HasGameStarted
     {
@@ -77,15 +75,15 @@ public class ScriptWagon : MonoBehaviour
         UpdateWagonsPositions();
         if (!HasGameStarted) return;
 
-        float targetRotationX = Input.touchCount > 0
+        float targetRotationX = (Input.touchCount > 0
 #if UNITY_EDITOR || UNITY_STANDALONE
             || Input.GetKey(rotateButton)
 #endif
-            ? 45f : -45f;
+        ) ? 45f : -45f;
 
         if (!_isBoosting)
         {
-            if (targetRotationX != _currentTargetRotationX)
+            if (Mathf.Abs(targetRotationX - _currentTargetRotationX) > 0.001f)
             {
                 RotateToX(targetRotationX);
                 _currentTargetRotationX = targetRotationX;
@@ -95,7 +93,7 @@ public class ScriptWagon : MonoBehaviour
             }
         }
 
-        transform.Translate(Vector3.back * speed * Time.deltaTime);
+        transform.Translate(speed * Time.deltaTime * Vector3.back);
 
         if (!_isBoosting)
         {
@@ -215,7 +213,7 @@ public class ScriptWagon : MonoBehaviour
         while ((direction > 0 && transform.position.y < targetY) ||
                (direction < 0 && transform.position.y > targetY))
         {
-            transform.Translate(Vector3.up * direction * boostSpeed * Time.deltaTime, Space.World);
+            transform.Translate(boostSpeed * Time.deltaTime * direction * Vector3.up, Space.World);
             yield return null;
         }
 

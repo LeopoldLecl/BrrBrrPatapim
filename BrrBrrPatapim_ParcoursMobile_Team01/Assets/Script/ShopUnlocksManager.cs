@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.Services.Core;
-using Unity.Services.Core.Environments;
 using UnityEngine;
 
 namespace Script
@@ -14,6 +12,7 @@ namespace Script
 
     public class ShopUnlocksManager : MonoBehaviour
     {
+        public static ShopUnlocksManager instance;
         
         public string environment = "production";
  
@@ -31,11 +30,24 @@ namespace Script
         // }
         
         private const string PlayerPrefsKey = "SHOP_UNLOCKS_JSON";
+        private const string PlayerPrefsGoldKey = "SHOP_GOLD_AMOUNT";
 
         private static HashSet<string> _unlockedCache;
         private static bool _loaded;
         private static bool _ugsInitialized;
         private static bool _ugsInitializing;
+        
+        [SerializeField]
+        private int goldAmount; // default 0
+        
+        public int GoldAmount => goldAmount;
+
+        private void Awake()
+        {
+            instance ??= this;
+            // Load persisted gold on startup
+            goldAmount = PlayerPrefs.GetInt(PlayerPrefsGoldKey, 0);
+        }
 
         private static void EnsureLoaded()
         {
@@ -94,6 +106,9 @@ namespace Script
             _unlockedCache = new HashSet<string>();
             _loaded = true;
             PlayerPrefs.DeleteKey(PlayerPrefsKey);
+            // Reset gold and remove persisted value
+            if (instance != null) instance.goldAmount = 0;
+            PlayerPrefs.DeleteKey(PlayerPrefsGoldKey);
             PlayerPrefs.Save();
         }
 
@@ -104,6 +119,42 @@ namespace Script
             var json = JsonUtility.ToJson(data);
             PlayerPrefs.SetString(PlayerPrefsKey, json);
             PlayerPrefs.Save();
+        }
+
+        // --- Gold persistence & helpers ---
+        public static int GetGold()
+        {
+            // If instance is alive, return its cached value; otherwise fetch from PlayerPrefs
+            return instance != null ? instance.goldAmount : PlayerPrefs.GetInt(PlayerPrefsGoldKey, 0);
+        }
+
+        public static void SetGold(int amount)
+        {
+            if (amount < 0) amount = 0;
+            if (instance != null)
+            {
+                instance.goldAmount = amount;
+            }
+            PlayerPrefs.SetInt(PlayerPrefsGoldKey, amount);
+            PlayerPrefs.Save();
+        }
+
+        public static void AddGold(int delta)
+        {
+            // Support negative delta; clamp at 0..int.MaxValue
+            long newValue = (long)GetGold() + delta;
+            if (newValue < 0) newValue = 0;
+            if (newValue > int.MaxValue) newValue = int.MaxValue;
+            SetGold((int)newValue);
+        }
+
+        public static bool TrySpendGold(int cost)
+        {
+            if (cost < 0) cost = 0;
+            int current = GetGold();
+            if (current < cost) return false;
+            SetGold(current - cost);
+            return true;
         }
     }
 }

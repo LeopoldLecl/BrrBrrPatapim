@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -64,22 +65,23 @@ public class SoundManager : MonoBehaviour
     private void RefreshAudioAndButton()
     {
         audioSources.Clear();
-#pragma warning disable 618
 #if UNITY_2023_1_OR_NEWER
         audioSources.AddRange(Object.FindObjectsByType<AudioSource>(FindObjectsInactive.Include, FindObjectsSortMode.None));
         var toggleButton = Object.FindFirstObjectByType<SoundToggleButton>(FindObjectsInactive.Include);
 #else
-        audioSources.AddRange(FindObjectsOfType<AudioSource>());
-        var toggleButton = FindObjectOfType<SoundToggleButton>();
+        // Use Resources to avoid deprecated FindObject(s)OfType in older Unity versions
+        audioSources.AddRange(Resources.FindObjectsOfTypeAll<AudioSource>()
+            .Where(a => a != null && a.gameObject.scene.IsValid()));
+        var toggleButton = Resources.FindObjectsOfTypeAll<SoundToggleButton>()
+            .FirstOrDefault(b => b != null && b.gameObject.scene.IsValid());
 #endif
-#pragma warning restore 618
         soundButtonImage = toggleButton ? toggleButton.GetComponent<Image>() : null;
     }
 
     private void ApplySoundState()
     {
         foreach (var audioSource in audioSources)
-            audioSource.volume = isOn ? 1.0f : 0.0f;
+            audioSource.volume = isOn ? 0.5f: 0.0f;
 
         if (soundButtonImage)
             soundButtonImage.sprite = isOn ? soundOnSprite : soundOffSprite;
