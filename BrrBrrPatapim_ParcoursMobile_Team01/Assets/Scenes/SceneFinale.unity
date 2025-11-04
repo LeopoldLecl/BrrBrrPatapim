@@ -5733,8 +5733,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3564229711681011990, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3564229711681011990, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
       propertyPath: m_Volume
-      value: 0.03
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518936704115488148, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7128923628638676487, guid: d67b4bca7c0a3024a9894710a41758cc, type: 3}
       propertyPath: scoreText
