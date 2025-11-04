@@ -60,6 +60,15 @@ public class ScriptWagon : MonoBehaviour
 
     private void Update()
     {
+        // Start game on first input: touch or configured key
+        if (!HasGameStarted)
+        {
+#if UNITY_EDITOR || UNITY_STANDALONE
+            if (Input.GetKeyDown(rotateButton)) HasGameStarted = true;
+#endif
+            if (Input.touchCount > 0) HasGameStarted = true;
+        }
+
         _positionHistory.Insert(0, transform.position);
         int requiredHistory = Mathf.CeilToInt(_wagonsList.Count * spacing * 10);
         if (_positionHistory.Count > requiredHistory)
@@ -68,7 +77,11 @@ public class ScriptWagon : MonoBehaviour
         UpdateWagonsPositions();
         if (!HasGameStarted) return;
 
-        float targetRotationX = Input.touchCount > 0 ? 45f : -45f;
+        float targetRotationX = Input.touchCount > 0
+#if UNITY_EDITOR || UNITY_STANDALONE
+            || Input.GetKey(rotateButton)
+#endif
+            ? 45f : -45f;
 
         if (!_isBoosting)
         {

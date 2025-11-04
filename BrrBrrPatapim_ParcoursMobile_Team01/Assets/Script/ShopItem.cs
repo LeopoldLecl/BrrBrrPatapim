@@ -13,26 +13,85 @@ public class ShopItem : MonoBehaviour
     [OnValueChanged("ChangeValues")]
     [SerializeField] private ShopItemScriptableObject shopItemData;
 
-    private Image itemImage;
+    // Allow manual hookup in inspector; will also be auto-resolved at runtime.
+    [SerializeField] private Image itemImage;
     private TextMeshProUGUI itemPriceText;
     private bool isPurchased;
 
     private void Awake()
     {
-        if (itemImage == null) itemImage = GetComponent<Image>();
-        if (itemPriceText == null) itemPriceText = GetComponentInChildren<TextMeshProUGUI>();
+        EnsureReferences();
+        SubscribeToData();
         InitializeState();
     }
 
     private void OnEnable()
     {
+        EnsureReferences();
+        SubscribeToData();
         InitializeState();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeFromData();
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeFromData();
     }
 
     private void Reset()
     {
-        itemImage = GetComponent<Image>();
-        itemPriceText = GetComponentInChildren<TextMeshProUGUI>();
+        // Prefer local, then children as fallback so prefab variants continue to work
+        if (itemImage == null) itemImage = GetComponent<Image>();
+        if (itemImage == null) itemImage = GetComponentInChildren<Image>(true);
+        if (itemPriceText == null) itemPriceText = GetComponentInChildren<TextMeshProUGUI>(true);
+    }
+
+    private void EnsureReferences()
+    {
+        if (itemImage == null)
+        {
+            itemImage = GetComponent<Image>();
+            if (itemImage == null) itemImage = GetComponentInChildren<Image>(true);
+        }
+        if (itemPriceText == null)
+        {
+            itemPriceText = GetComponentInChildren<TextMeshProUGUI>(true);
+        }
+    }
+
+    private void SubscribeToData()
+    {
+        if (shopItemData == null) return;
+        UnsubscribeFromData(); // avoid duplicates
+        shopItemData.IconChanged += OnIconChanged;
+        shopItemData.Changed += OnDataChanged;
+    }
+
+    private void UnsubscribeFromData()
+    {
+        if (shopItemData == null) return;
+        shopItemData.IconChanged -= OnIconChanged;
+        shopItemData.Changed -= OnDataChanged;
+    }
+
+    private void OnIconChanged(Sprite _)
+    {
+        // Only update sprite to be lightweight
+        var sprite = shopItemData != null ? shopItemData.GetItemIcon() : null;
+        if (itemImage != null)
+        {
+            itemImage.sprite = sprite;
+            if (sprite != null) itemImage.enabled = true;
+        }
+    }
+
+    private void OnDataChanged(ShopItemScriptableObject _)
+    {
+        InitializeState();
     }
 
     private void InitializeState()
@@ -59,6 +118,7 @@ public class ShopItem : MonoBehaviour
 
     private void ApplyStateToUI()
     {
+        // Price text
         if (itemPriceText != null)
         {
             if (shopItemData == null)
@@ -75,9 +135,17 @@ public class ShopItem : MonoBehaviour
             }
         }
 
+        // Sprite assignment for UI Image or SpriteRenderer
+        var sprite = shopItemData != null ? shopItemData.GetItemIcon() : null;
         if (itemImage != null)
         {
-            itemImage.sprite = shopItemData != null ? shopItemData.GetItemIcon() : null;
+            itemImage.sprite = sprite;
+            // Ensure image is visible if a sprite exists
+            if (sprite != null)
+            {
+                itemImage.enabled = true;
+                var c = itemImage.color; c.a = Mathf.Max(c.a, 1f); itemImage.color = c;
+            }
         }
 
         var btn = GetComponent<Button>();
@@ -91,6 +159,9 @@ public class ShopItem : MonoBehaviour
     [Button("Refresh Values")]
     public void ChangeValues()
     {
+        EnsureReferences();
+        UnsubscribeFromData();
+        SubscribeToData();
         ApplyStateToUI();
     }
 
