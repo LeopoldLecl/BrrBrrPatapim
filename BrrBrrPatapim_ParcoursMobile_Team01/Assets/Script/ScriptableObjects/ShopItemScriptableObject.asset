@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemScriptableObject
   itemIcon: {fileID: 21300008, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
   itemPrice: 10
+  id: f019ce49fa7342cb8774075b0bee322c
+  productId: product_test
