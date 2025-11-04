@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using Script;
 using Script.ScriptableObjects.Scripts;
 using UnityEditor.IMGUI.Controls;
 
@@ -66,29 +65,35 @@ public class ShopItemsWindow : EditorWindow
             {
                 using (new EditorGUILayout.HorizontalScope())
                 {
-                    // Icon preview
-                    EditorGUILayout.ObjectField(so.GetItemIcon(), typeof(Sprite), false, GUILayout.Width(64), GUILayout.Height(64));
+                    // Icon preview & drag target
+                    var icon = so.GetItemIcon();
+                    var newIcon = (Sprite)EditorGUILayout.ObjectField(icon, typeof(Sprite), false, GUILayout.Width(64), GUILayout.Height(64));
 
                     using (new EditorGUILayout.VerticalScope())
                     {
                         EditorGUILayout.LabelField(so.name, EditorStyles.boldLabel);
 
                         EditorGUI.BeginChangeCheck();
-                        Undo.RecordObject(so, "Edit Shop Item");
 
-                        // Editable fields
-                        var newIcon = (Sprite)EditorGUILayout.ObjectField("Icon", so.GetItemIcon(), typeof(Sprite), false);
-                        var newPrice = EditorGUILayout.IntField("Price", so.GetItemPrice());
-                        var newProductId = EditorGUILayout.TextField("Product ID", so.GetProductId());
+                        // Editable fields via setters so change events fire
+                        var iconField = (Sprite)EditorGUILayout.ObjectField("Icon", so.GetItemIcon(), typeof(Sprite), false);
+                        var priceField = EditorGUILayout.IntField("Price", so.GetItemPrice());
+                        var productField = EditorGUILayout.TextField("Product ID", so.GetProductId());
 
                         if (EditorGUI.EndChangeCheck())
                         {
-                            // There are no setters, so access via serialized object
-                            var soSerialized = new SerializedObject(so);
-                            soSerialized.FindProperty("itemIcon").objectReferenceValue = newIcon;
-                            soSerialized.FindProperty("itemPrice").intValue = newPrice;
-                            soSerialized.FindProperty("productId").stringValue = newProductId;
-                            soSerialized.ApplyModifiedProperties();
+                            Undo.RecordObject(so, "Edit Shop Item");
+                            if (iconField != so.GetItemIcon()) so.SetItemIcon(iconField);
+                            if (priceField != so.GetItemPrice()) so.SetItemPrice(priceField);
+                            if (productField != so.GetProductId()) so.SetProductId(productField);
+                            EditorUtility.SetDirty(so);
+                        }
+
+                        // Also handle thumbnail change
+                        if (newIcon != icon)
+                        {
+                            Undo.RecordObject(so, "Change Item Icon");
+                            so.SetItemIcon(newIcon);
                             EditorUtility.SetDirty(so);
                         }
 
