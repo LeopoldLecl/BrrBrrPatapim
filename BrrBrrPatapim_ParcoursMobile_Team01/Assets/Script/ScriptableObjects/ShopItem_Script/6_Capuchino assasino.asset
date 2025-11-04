@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af13635be917474da4138a129e42ac6, type: 3}
   m_Name: 6_Capuchino assasino
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemScriptableObject
-  itemIcon: {fileID: 21300000, guid: 238590a69bd15c746a7465d7b4052bfe, type: 3}
+  itemIcon: {fileID: 21300000, guid: 94bd97ddd11d53048b14aa046a84a42b, type: 3}
   itemPrice: 100
+  id: 39a31c01f62f4a658cb1d9e403c4907b
+  productId: 
