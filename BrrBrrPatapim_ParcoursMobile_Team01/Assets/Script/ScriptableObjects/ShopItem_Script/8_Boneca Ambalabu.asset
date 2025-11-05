@@ -16,3 +16,6 @@ MonoBehaviour:
   itemPrice: 1000
   id: 59ea89c94c124096afe75366454090c4
   productId: 
+  onUnlocked:
+    m_PersistentCalls:
+      m_Calls: []
