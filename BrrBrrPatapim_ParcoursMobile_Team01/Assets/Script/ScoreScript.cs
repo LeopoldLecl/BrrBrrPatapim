@@ -1,7 +1,9 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.Serialization;
+using Script;
 
+namespace Script
+{
 public class ScoreScript : MonoBehaviour
 {
     [Header("References")]
@@ -156,6 +158,8 @@ public class ScoreScript : MonoBehaviour
         bonusDuration = 5f;
         Debug.Log("Boost éclair activé !");
 
+        PlayerAnalyticsTracker.RecordEventSafe("boost_lightning");
+
         if (lightningAudioSource != null)
             lightningAudioSource.Play();
 
@@ -168,6 +172,8 @@ public class ScoreScript : MonoBehaviour
     {
         starBonusMultiplier += 0.10f;
         Debug.Log($"Boost étoile  x{starBonusMultiplier:F2}");
+
+        PlayerAnalyticsTracker.RecordEventSafe("boost_star");
 
         UpdateStarMultiplierDisplay();
 
@@ -190,4 +196,5 @@ public class ScoreScript : MonoBehaviour
     }
 
     public int GetScore() => actualScore;
+}
 }

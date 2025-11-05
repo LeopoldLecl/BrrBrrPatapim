@@ -3,81 +3,93 @@ using UnityEngine;
 using UnityEngine.Events;
 using Unity.Cinemachine;
 using UnityEngine.SceneManagement;
+using Script;
 
-public class CanvasManager : MonoBehaviour
+namespace Script
 {
-    public UnityEvent onStartGame;
-
-    [Header("UI")]
-    [SerializeField] private GameObject menuUI;
-    [SerializeField] private GameObject gameUI;
-    [SerializeField] private GameObject postGameUI;
-
-    [Header("Cinemachine")]
-    [SerializeField] private CinemachineCamera gameplayCamera;
-    [SerializeField] private CinemachineCamera endGameCamera;
-    
-    [SerializeField] TextMeshProUGUI highscoreText;
-
-    private void Start()
+    public class CanvasManager : MonoBehaviour
     {
-        UpdateHighscoreText();
-    }
+        public UnityEvent onStartGame;
 
-    private void UpdateHighscoreText()
-    {
-        int highscore = PlayerPrefs.GetInt("highscore", 0);
-        if (highscoreText != null)
+        [Header("UI")]
+        [SerializeField] private GameObject menuUI;
+        [SerializeField] private GameObject gameUI;
+        [SerializeField] private GameObject postGameUI;
+
+        [Header("Cinemachine")]
+        [SerializeField] private CinemachineCamera gameplayCamera;
+        [SerializeField] private CinemachineCamera endGameCamera;
+        
+        [SerializeField] TextMeshProUGUI highscoreText;
+
+        private void Start()
         {
-            highscoreText.text = $"HighScore : {highscore}";
+            UpdateHighscoreText();
         }
-    }
-    
-    public void ResetPlayerStatsAndReboot()
-    {
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 
-    public void StartGame()
-    {
-        menuUI.SetActive(false);
-        gameUI.SetActive(true);
-
-        onStartGame.Invoke();
-        PortalsManager.Instance.StartGame();
-
-        // S'assurer que la cam�ra de jeu est active au d�marrage
-        if (gameplayCamera != null && endGameCamera != null)
+        private void UpdateHighscoreText()
         {
-            gameplayCamera.Priority = 12;
-            endGameCamera.Priority = 0;
+            int highscore = PlayerPrefs.GetInt("highscore", 0);
+            if (highscoreText != null)
+            {
+                highscoreText.text = $"HighScore : {highscore}";
+            }
         }
-    }
-
-    public void EndGame()
-    {
-        menuUI.SetActive(false);
-        gameUI.SetActive(false);
-        postGameUI.SetActive(true);
-
-        Debug.Log("Fin de jeu - Switch cam�ra");
-
-        // Activer la cam�ra de fin avec priorit� plus haute
-        if (endGameCamera != null)
+        
+        public void ResetPlayerStatsAndReboot()
         {
-            endGameCamera.Priority = 100;
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        else
+
+        public void StartGame()
         {
-            Debug.LogWarning("EndGameCamera non assign�e !");
+            menuUI.SetActive(false);
+            gameUI.SetActive(true);
+
+            onStartGame.Invoke();
+            PortalsManager.Instance.StartGame();
+
+            // Analytics: mark gameplay started
+            PlayerAnalyticsTracker.SetPlaying(true);
+            PlayerAnalyticsTracker.RecordEventSafe("ui_start_game");
+
+            // S'assurer que la cam�ra de jeu est active au d�marrage
+            if (gameplayCamera != null && endGameCamera != null)
+            {
+                gameplayCamera.Priority = 12;
+                endGameCamera.Priority = 0;
+            }
         }
-    }
 
+        public void EndGame()
+        {
+            menuUI.SetActive(false);
+            gameUI.SetActive(false);
+            postGameUI.SetActive(true);
 
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Debug.Log("Fin de jeu - Switch caméra");
+
+            // Analytics: mark gameplay ended
+            PlayerAnalyticsTracker.SetPlaying(false);
+            PlayerAnalyticsTracker.RecordEventSafe("ui_end_game");
+
+            // Activer la cam�ra de fin avec priorit� plus haute
+            if (endGameCamera != null)
+            {
+                endGameCamera.Priority = 100;
+            }
+            else
+            {
+                Debug.LogWarning("EndGameCamera non assignée !");
+            }
+        }
+
+        public void RestartGame()
+        {
+            PlayerAnalyticsTracker.RecordEventSafe("ui_restart");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }

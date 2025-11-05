@@ -1,4 +1,5 @@
 using System;
+using Script;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -185,6 +186,7 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
     public void OnUnityAdsAdLoaded(string placementId)
     {
         DebugLog($"Loaded: {placementId}");
+        PlayerAnalyticsTracker.RecordEventSafe($"ad_loaded_{placementId}");
         if (placementId == rewardedPlacementId)
         {
             _rewardedLoaded = true;
@@ -208,6 +210,7 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
     public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
     {
         LogError($"LoadFail: {placementId} {error} {message}");
+        PlayerAnalyticsTracker.RecordEventSafe($"ad_load_fail_{placementId}");
         if (placementId == rewardedPlacementId) _rewardedLoaded = false;
         if (placementId == interstitialPlacementId) _interstitialLoaded = false;
     }
@@ -216,6 +219,7 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
     public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
     {
         LogError($"ShowFail: {placementId} {error} {message}");
+        PlayerAnalyticsTracker.RecordEventSafe($"ad_show_fail_{placementId}");
         if (placementId == rewardedPlacementId) _rewardedLoaded = false;
         if (placementId == interstitialPlacementId) _interstitialLoaded = false;
     }
@@ -223,11 +227,13 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
     public void OnUnityAdsShowStart(string placementId)
     {
         DebugLog($"Show start: {placementId}");
+        PlayerAnalyticsTracker.RecordEventSafe($"ad_show_start_{placementId}");
     }
 
     public void OnUnityAdsShowClick(string placementId)
     {
         DebugLog($"Click: {placementId}");
+        PlayerAnalyticsTracker.RecordEventSafe($"ad_click_{placementId}");
     }
 
     public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
@@ -236,6 +242,7 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
         {
             _rewardedLoaded = false;
             LogEvent($"Rewarded: {showCompletionState}");
+            PlayerAnalyticsTracker.RecordEventSafe($"ad_rewarded_{showCompletionState}");
             if (showCompletionState == UnityAdsShowCompletionState.COMPLETED)
                 OnRewardedCompleted?.Invoke();
             else if (showCompletionState == UnityAdsShowCompletionState.SKIPPED)
@@ -245,6 +252,7 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
         {
             _interstitialLoaded = false;
             LogEvent($"Inter: {showCompletionState}");
+            PlayerAnalyticsTracker.RecordEventSafe($"ad_interstitial_{showCompletionState}");
             OnInterstitialClosed?.Invoke();
         }
     }

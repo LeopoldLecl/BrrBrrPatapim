@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Script;
 
 public class DeathZoneFollow : MonoBehaviour
 {
@@ -99,6 +100,10 @@ public class DeathZoneFollow : MonoBehaviour
             OnGameOver.Invoke();
             playerScore = ScriptWagon.Instance.gameObject.GetComponentInChildren<ScoreScript>().DisplayedScore; 
             endGameScores.GenerateLeaderboard(playerScore);
+
+            // Analytics: game over with score context (event name only due to payload limits)
+            PlayerAnalyticsTracker.SetPlaying(false);
+            PlayerAnalyticsTracker.RecordEventSafe("game_over");
         }
     }
 

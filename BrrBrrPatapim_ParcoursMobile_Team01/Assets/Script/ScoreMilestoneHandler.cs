@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Script;
 
 public class ScoreMilestoneHandler : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class ScoreMilestoneHandler : MonoBehaviour
         public GameObject toDisable;
         public GameObject toEnable;
         public Material skyboxToApply;
-        public UnityEvent onMilestoneReached; //  Nouvel événement
+        public UnityEvent onMilestoneReached; //  Nouvel ï¿½vï¿½nement
         [HideInInspector] public bool triggered = false;
     }
 
@@ -37,7 +38,10 @@ public class ScoreMilestoneHandler : MonoBehaviour
                 if (milestone.skyboxToApply != null)
                     RenderSettings.skybox = milestone.skyboxToApply;
 
-                milestone.onMilestoneReached?.Invoke(); //  Déclenchement de l'événement
+                milestone.onMilestoneReached?.Invoke(); //  DÃ©clenchement de l'Ã©vÃ©nement
+
+                // Analytics: milestone reached
+                PlayerAnalyticsTracker.RecordEventSafe($"milestone_{milestone.requiredScore}");
 
                 milestone.triggered = true;
             }

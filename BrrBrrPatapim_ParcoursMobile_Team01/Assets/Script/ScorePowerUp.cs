@@ -1,3 +1,4 @@
+using Script;
 using UnityEngine;
 
 public class ScorePowerUp : MonoBehaviour

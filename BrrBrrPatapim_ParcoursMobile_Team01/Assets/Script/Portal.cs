@@ -3,6 +3,7 @@ using UnityEngine;
 using static GameplayEnums;
 using NaughtyAttributes;
 using TMPro;
+using Script;
 
 public class Portal : MonoBehaviour
 {
@@ -72,6 +73,9 @@ public class Portal : MonoBehaviour
                     break;
             }
         }
+
+        // Analytics: portal touched
+        PlayerAnalyticsTracker.RecordEventSafe($"portal_{portalType.ToString().ToLower()}_touch");
 
         other.GetComponent<ScriptWagon>()?.OnPortalTouched(portalType, Value);
     }

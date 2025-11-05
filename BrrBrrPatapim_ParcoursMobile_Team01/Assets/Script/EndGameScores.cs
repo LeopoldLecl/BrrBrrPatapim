@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Script;
 
+namespace Script
+{
 public class EndGameScores : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI leaderboardText;
@@ -28,6 +31,7 @@ public class EndGameScores : MonoBehaviour
         {
             PlayerPrefs.SetInt("highscore", playerScore);
             PlayerPrefs.Save();
+            PlayerAnalyticsTracker.RecordEventSafe("new_highscore");
         }
         
         leaderboard.Clear();
@@ -81,6 +85,8 @@ public class EndGameScores : MonoBehaviour
         fourthPlayerName.text = leaderboard.Count > 3 ? leaderboard[3].playerName : "";
 
         DisplayLeaderboard();
+
+        PlayerAnalyticsTracker.RecordEventSafe("leaderboard_generated");
     }
     
     public void DisplayLeaderboard()
@@ -112,4 +118,5 @@ public class LeaderboardEntry
         playerName = name;
         this.score = score;
     }
+}
 }
