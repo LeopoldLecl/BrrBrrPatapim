@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.Purchasing;
 
 namespace Script
 {
@@ -13,6 +15,8 @@ namespace Script
     public class ShopUnlocksManager : MonoBehaviour
     {
         public static ShopUnlocksManager instance;
+        
+        [SerializeField] TextMeshProUGUI goldText;
         
         public string environment = "production";
  
@@ -39,8 +43,18 @@ namespace Script
         
         [SerializeField]
         private int goldAmount; // default 0
-        
-        public int GoldAmount => goldAmount;
+
+        public int GoldAmount
+        {
+            get
+            {
+                return goldAmount;
+            }
+            private set
+            {
+                goldAmount = value;
+            }
+        }
 
         private void Awake()
         {
@@ -49,7 +63,7 @@ namespace Script
             goldAmount = PlayerPrefs.GetInt(PlayerPrefsGoldKey, 0);
         }
 
-        private static void EnsureLoaded()
+        private void EnsureLoaded()
         {
             if (_loaded) return;
             var json = PlayerPrefs.GetString(PlayerPrefsKey, string.Empty);
@@ -74,14 +88,14 @@ namespace Script
             _loaded = true;
         }
 
-        public static bool IsUnlocked(string id)
+        public bool IsUnlocked(string id)
         {
             if (string.IsNullOrEmpty(id)) return false;
             EnsureLoaded();
             return _unlockedCache.Contains(id);
         }
 
-        public static void Unlock(string id)
+        public void Unlock(string id)
         {
             if (string.IsNullOrEmpty(id)) return;
             EnsureLoaded();
@@ -91,7 +105,7 @@ namespace Script
             }
         }
 
-        public static void Lock(string id)
+        public void Lock(string id)
         {
             if (string.IsNullOrEmpty(id)) return;
             EnsureLoaded();
@@ -101,18 +115,18 @@ namespace Script
             }
         }
 
-        public static void ClearAll()
+        public void ClearAll()
         {
             _unlockedCache = new HashSet<string>();
             _loaded = true;
             PlayerPrefs.DeleteKey(PlayerPrefsKey);
             // Reset gold and remove persisted value
-            if (instance != null) instance.goldAmount = 0;
+            if (instance != null) instance.GoldAmount = 0;
             PlayerPrefs.DeleteKey(PlayerPrefsGoldKey);
             PlayerPrefs.Save();
         }
 
-        public static void Save()
+        public void Save()
         {
             EnsureLoaded();
             var data = new ShopUnlocksData { unlockedIds = new List<string>(_unlockedCache) };
@@ -125,21 +139,27 @@ namespace Script
         public static int GetGold()
         {
             // If instance is alive, return its cached value; otherwise fetch from PlayerPrefs
-            return instance != null ? instance.goldAmount : PlayerPrefs.GetInt(PlayerPrefsGoldKey, 0);
+            return instance != null ? instance.GoldAmount : PlayerPrefs.GetInt(PlayerPrefsGoldKey, 0);
         }
 
-        public static void SetGold(int amount)
+        public void SetGold(int amount)
         {
             if (amount < 0) amount = 0;
             if (instance != null)
             {
-                instance.goldAmount = amount;
+                instance.GoldAmount = amount;
             }
+            
+            if (goldText != null)
+            {
+                goldText.text = goldAmount.ToString();
+            }
+            
             PlayerPrefs.SetInt(PlayerPrefsGoldKey, amount);
             PlayerPrefs.Save();
         }
 
-        public static void AddGold(int delta)
+        public void AddGold(int delta)
         {
             // Support negative delta; clamp at 0..int.MaxValue
             long newValue = (long)GetGold() + delta;
@@ -148,13 +168,30 @@ namespace Script
             SetGold((int)newValue);
         }
 
-        public static bool TrySpendGold(int cost)
+        public bool TrySpendGold(int cost)
         {
             if (cost < 0) cost = 0;
             int current = GetGold();
             if (current < cost) return false;
             SetGold(current - cost);
             return true;
+        }
+        
+        public void OnGoldPurchased(Product product)
+        {
+            if (product == null) return;
+            if (product.definition.id == "product_gold_small")
+            {
+                AddGold(100);
+            }
+            else if (product.definition.id == "product_gold_medium")
+            {
+                AddGold(250);
+            }
+            else if (product.definition.id == "product_gold_large")
+            {
+                AddGold(600);
+            }
         }
     }
 }

@@ -112,7 +112,7 @@ public class ShopItem : MonoBehaviour
         }
         else
         {
-            isPurchased = ShopUnlocksManager.IsUnlocked(id);
+            isPurchased = ShopUnlocksManager.instance.IsUnlocked(id);
         }
         ApplyStateToUI();
     }
@@ -173,7 +173,7 @@ public class ShopItem : MonoBehaviour
         // Optional: verify product.definition.id == shopItemData.GetProductId()
         var id = shopItemData.GetItemId();
         if (string.IsNullOrEmpty(id)) return;
-        ShopUnlocksManager.Unlock(id);
+        ShopUnlocksManager.instance.Unlock(id);
         isPurchased = true;
         ApplyStateToUI();
     }

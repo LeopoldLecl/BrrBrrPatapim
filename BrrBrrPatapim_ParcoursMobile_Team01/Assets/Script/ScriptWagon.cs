@@ -58,15 +58,6 @@ public class ScriptWagon : MonoBehaviour
 
     private void Update()
     {
-        // Start game on first input: touch or configured key
-        if (!HasGameStarted)
-        {
-#if UNITY_EDITOR || UNITY_STANDALONE
-            if (Input.GetKeyDown(rotateButton)) HasGameStarted = true;
-#endif
-            if (Input.touchCount > 0) HasGameStarted = true;
-        }
-
         _positionHistory.Insert(0, transform.position);
         int requiredHistory = Mathf.CeilToInt(_wagonsList.Count * spacing * 10);
         if (_positionHistory.Count > requiredHistory)
