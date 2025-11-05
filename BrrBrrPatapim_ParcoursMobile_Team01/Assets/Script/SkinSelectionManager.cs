@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using Script;
 
 public class SkinsSelectionManager : MonoBehaviour
 {
@@ -16,34 +18,54 @@ public class SkinsSelectionManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
 
-        // Charger le dernier skin équipé sauvegardé
         equippedSkinId = PlayerPrefs.GetString(EquippedSkinKey, string.Empty);
     }
 
     private void Start()
     {
-        // Une fois tous les ShopItems initialisés, on restaure celui qui correspond à l'ID sauvegardé
         if (!string.IsNullOrEmpty(equippedSkinId))
+            StartCoroutine(RestoreEquippedSkinWhenReady());
+    }
+
+    private IEnumerator RestoreEquippedSkinWhenReady()
+    {
+        int attempts = 0;
+        while (attempts < 20)
         {
-            ShopItem[] items = FindObjectsByType<ShopItem>(FindObjectsSortMode.None);
-            foreach (var item in items)
+            ShopItem[] allItems = FindObjectsByType<ShopItem>(FindObjectsSortMode.None);
+            if (allItems.Length > 0)
             {
-                var id = item.GetItemId();
-                if (id == equippedSkinId)
+                Debug.Log($"[Restore] Found {allItems.Length} ShopItems after {attempts} checks");
+
+                foreach (var item in allItems)
                 {
-                    SetEquippedSkin(item, save: false);
-                    break;
+                    string id = item.GetItemId();
+                    bool unlocked = ShopUnlocksManager.instance != null &&
+                                    ShopUnlocksManager.instance.IsUnlocked(id);
+
+                    Debug.Log($"[Restore] Checking {item.name}  id={id}, unlocked={unlocked}");
+
+                    if (id == equippedSkinId && unlocked)
+                    {
+                        Debug.Log($"[Restore] Match found! Restoring {item.name}");
+                        currentEquippedItem = item;
+                        currentEquippedItem.SetEquipped(true);
+                        yield break;
+                    }
                 }
             }
+
+            attempts++;
+            yield return new WaitForSeconds(0.1f); 
         }
+
+        Debug.LogWarning("[Restore]  Aucun ShopItem trouvé après plusieurs tentatives.");
     }
 
     public void SetEquippedSkin(ShopItem item, bool save = true)
     {
-        // Si on reclique sur le même skin > déséquipé
         if (currentEquippedItem == item)
         {
             currentEquippedItem.SetEquipped(false);
@@ -51,16 +73,16 @@ public class SkinsSelectionManager : MonoBehaviour
             equippedSkinId = string.Empty;
 
             if (save)
+            {
                 PlayerPrefs.DeleteKey(EquippedSkinKey);
-
+                PlayerPrefs.Save();
+            }
             return;
         }
 
-        // Déséquipe l'ancien
         if (currentEquippedItem != null)
             currentEquippedItem.SetEquipped(false);
 
-        // Équipe le nouveau
         currentEquippedItem = item;
         currentEquippedItem.SetEquipped(true);
         equippedSkinId = item.GetItemId();
@@ -70,6 +92,8 @@ public class SkinsSelectionManager : MonoBehaviour
             PlayerPrefs.SetString(EquippedSkinKey, equippedSkinId);
             PlayerPrefs.Save();
         }
+
+        Debug.Log($" Skin équipé sauvegardé : {equippedSkinId}");
     }
 
     public bool IsEquipped(ShopItem item)
@@ -78,4 +102,25 @@ public class SkinsSelectionManager : MonoBehaviour
     }
 
     public string GetEquippedSkinId() => equippedSkinId;
+
+    public void ForceUnequipAll()
+    {
+        if (currentEquippedItem != null)
+        {
+            currentEquippedItem.SetEquipped(false);
+            currentEquippedItem = null;
+        }
+
+        equippedSkinId = string.Empty;
+        PlayerPrefs.DeleteKey(EquippedSkinKey);
+        PlayerPrefs.Save();
+
+        Debug.Log(" Skin déséquipé et supprimé des PlayerPrefs");
+    }
+
+    public void RestoreEquippedSkin()
+    {
+        if (!string.IsNullOrEmpty(equippedSkinId))
+            StartCoroutine(RestoreEquippedSkinWhenReady());
+    }
 }

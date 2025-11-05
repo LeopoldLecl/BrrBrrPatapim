@@ -139,8 +139,15 @@ namespace Script
                 item.ForceLockedState(); 
             }
 
+            if (SkinsSelectionManager.Instance != null)
+            {
+                SkinsSelectionManager.Instance.ForceUnequipAll();
+            }
+
+
             Debug.Log(" Shop totalement réinitialisé (gold, unlocks, skins).");
         }
+
 
 
         public void CloseUI()
