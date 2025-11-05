@@ -17,8 +17,8 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
 {
     // Placements (match your Unity Dashboard)
     [Header("Placements")]
-    [SerializeField] private string interstitialPlacementId = "video";
-    [SerializeField] private string rewardedPlacementId = "rewardedVideo";
+    [SerializeField] private string interstitialPlacementId = "Interstitial_Android";
+    [SerializeField] private string rewardedPlacementId = "Rewarded_Android";
 
     // Game IDs per platform (set from the Unity Dashboard)
     [Header("Game IDs")]
@@ -120,7 +120,7 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
         DebugLog($"Init Ads (gameId={_gameId}, test={testMode})");
         Advertisement.Initialize(_gameId, testMode, this);
     }
-
+ 
     public void LoadRewardedAd()
     {
         if (!Advertisement.isInitialized)

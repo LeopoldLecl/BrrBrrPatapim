@@ -150,6 +150,7 @@ namespace Script
                 instance.GoldAmount = amount;
             }
             
+            
             if (goldText != null)
             {
                 goldText.text = goldAmount.ToString();

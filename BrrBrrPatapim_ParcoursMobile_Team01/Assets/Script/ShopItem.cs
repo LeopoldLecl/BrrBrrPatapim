@@ -117,7 +117,7 @@ public class ShopItem : MonoBehaviour
         ApplyStateToUI();
     }
 
-    private void ApplyStateToUI()
+    private void ApplyStateToUI()   
     {
         // Price text
         if (itemPriceText != null)
