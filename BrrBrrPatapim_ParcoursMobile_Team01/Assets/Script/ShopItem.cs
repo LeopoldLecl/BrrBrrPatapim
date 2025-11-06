@@ -2,200 +2,159 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using NaughtyAttributes;
-using Script; // for ShopUnlocksManager
+using Script;
 using Script.ScriptableObjects.Scripts;
-using UnityEngine.Purchasing; // for ShopItemScriptableObject
-#if UNITY_PURCHASING
-using UnityEngine.Purchasing;
-#endif
 
 public class ShopItem : MonoBehaviour
 {
     [OnValueChanged("ChangeValues")]
     [SerializeField] private ShopItemScriptableObject shopItemData;
 
-    // Allow manual hookup in inspector; will also be auto-resolved at runtime.
+    [Header("UI References")]
     [SerializeField] private Image itemImage;
-    private TextMeshProUGUI itemPriceText;
+    [SerializeField] private TextMeshProUGUI itemPriceText;
+    [SerializeField] private Button buyButton;
+
+    [Header("Colors")]
+    [SerializeField] private Color defaultColor = Color.white;
+    [SerializeField] private Color equippedColor = new Color(0.3f, 1f, 0.3f);
+
     private bool isPurchased;
+    private bool isEquipped;
 
     private void Awake()
     {
-        EnsureReferences();
-        SubscribeToData();
-        InitializeState();
+        if (buyButton == null)
+            buyButton = GetComponent<Button>();
+
+        if (buyButton != null)
+            buyButton.onClick.AddListener(OnButtonClick);
     }
 
-    private void OnEnable()
+    private System.Collections.IEnumerator Start()
     {
-        EnsureReferences();
-        SubscribeToData();
+        yield return null; // attend une frame pour que ShopUnlocksManager soit prêt
         InitializeState();
-    }
-
-    private void OnDisable()
-    {
-        UnsubscribeFromData();
     }
 
     private void OnDestroy()
     {
-        UnsubscribeFromData();
+        if (buyButton != null)
+            buyButton.onClick.RemoveListener(OnButtonClick);
     }
 
-    private void Reset()
-    {
-        // Prefer local, then children as fallback so prefab variants continue to work
-        if (itemImage == null) itemImage = GetComponent<Image>();
-        if (itemImage == null) itemImage = GetComponentInChildren<Image>(true);
-        if (itemPriceText == null) itemPriceText = GetComponentInChildren<TextMeshProUGUI>(true);
-    }
 
-    private void EnsureReferences()
+    public void ForceLockedState()
     {
-        if (itemImage == null)
+        // Déséquipe visuellement
+        SetEquipped(false);
+
+        // Marque comme non acheté
+        var id = GetItemId();
+        if (!string.IsNullOrEmpty(id))
         {
-            itemImage = GetComponent<Image>();
-            if (itemImage == null) itemImage = GetComponentInChildren<Image>(true);
+            isPurchased = false;
         }
-        if (itemPriceText == null)
-        {
-            itemPriceText = GetComponentInChildren<TextMeshProUGUI>(true);
-        }
+
+        ApplyStateToUI();
     }
 
-    private void SubscribeToData()
+    public void CloseUI()
     {
-        if (shopItemData == null) return;
-        UnsubscribeFromData(); // avoid duplicates
-        shopItemData.IconChanged += OnIconChanged;
-        shopItemData.Changed += OnDataChanged;
+        gameObject.SetActive(false);
     }
 
-    private void UnsubscribeFromData()
-    {
-        if (shopItemData == null) return;
-        shopItemData.IconChanged -= OnIconChanged;
-        shopItemData.Changed -= OnDataChanged;
-    }
-
-    private void OnIconChanged(Sprite _)
-    {
-        // Only update sprite to be lightweight
-        var sprite = shopItemData != null ? shopItemData.GetItemIcon() : null;
-        if (itemImage != null)
-        {
-            itemImage.sprite = sprite;
-            if (sprite != null) itemImage.enabled = true;
-        }
-    }
-
-    private void OnDataChanged(ShopItemScriptableObject _)
-    {
-        InitializeState();
-    }
 
     private void InitializeState()
     {
-        if (shopItemData == null)
+        if (shopItemData == null) return;
+
+        if (ShopUnlocksManager.instance == null)
         {
-            isPurchased = false;
-            ApplyStateToUI();
-            return;
+            ShopUnlocksManager.instance = FindFirstObjectByType<ShopUnlocksManager>();
+            if (ShopUnlocksManager.instance == null)
+            {
+                Debug.LogError("ShopUnlocksManager is missing in scene!");
+                return;
+            }
         }
 
-        var id = shopItemData.GetItemId();
-        if (string.IsNullOrEmpty(id))
+        string id = shopItemData.GetItemId();
+        isPurchased = ShopUnlocksManager.instance.IsUnlocked(id);
+        ApplyStateToUI();
+    }
+
+    private void OnButtonClick()
+    {
+        if (!isPurchased)
         {
-            Debug.LogWarning($"ShopItem '{name}' has ShopItemScriptableObject without ID. Open the asset in the editor to auto-generate an ID.");
-            isPurchased = false;
+            TryPurchase();
         }
         else
         {
-            isPurchased = ShopUnlocksManager.instance.IsUnlocked(id);
+            SkinsSelectionManager.Instance?.SetEquippedSkin(this);
         }
+    }
+
+    public void SetEquipped(bool equipped)
+    {
+        isEquipped = equipped;
         ApplyStateToUI();
     }
 
-    private void ApplyStateToUI()   
+    private void TryPurchase()
     {
-        // Price text
-        if (itemPriceText != null)
+        int price = shopItemData.GetItemPrice();
+
+        if (!ShopUnlocksManager.instance.TrySpendGold(price))
         {
-            if (shopItemData == null)
-            {
-                itemPriceText.text = "null";
-            }
-            else if (isPurchased)
-            {
-                itemPriceText.text = "Owned";
-            }
-            else
-            {
-                itemPriceText.text = shopItemData.GetItemPrice().ToString();
-            }
+            Debug.Log("Not enough gold to purchase this item.");
+            return;
         }
 
-        // Sprite assignment for UI Image or SpriteRenderer
-        var sprite = shopItemData != null ? shopItemData.GetItemIcon() : null;
+        ShopUnlocksManager.instance.Unlock(shopItemData.GetItemId());
+        isPurchased = true;
+        shopItemData.InvokeUnlockEvent();
+        ApplyStateToUI();
+    }
+
+    public string GetItemId()
+    {
+        return shopItemData != null ? shopItemData.GetItemId() : string.Empty;
+    }
+
+
+    private void ApplyStateToUI()
+    {
+        if (itemPriceText)
+        {
+            if (!isPurchased)
+                itemPriceText.text = $"{shopItemData.GetItemPrice()} G";
+            else if (isEquipped)
+                itemPriceText.text = "Equipped";
+            else
+                itemPriceText.text = "Owned";
+        }
+
+        if (buyButton != null)
+        {
+            var colors = buyButton.colors;
+            colors.normalColor = isEquipped ? equippedColor : defaultColor;
+            colors.selectedColor = colors.normalColor;
+            colors.highlightedColor = isEquipped ? equippedColor : defaultColor * 1.1f;
+            buyButton.colors = colors;
+        }
+
         if (itemImage != null)
         {
-            itemImage.sprite = sprite;
-            // Ensure image is visible if a sprite exists
-            if (sprite != null)
-            {
-                itemImage.enabled = true;
-                var c = itemImage.color; c.a = Mathf.Max(c.a, 1f); itemImage.color = c;
-            }
-        }
-
-        var btn = GetComponent<Button>();
-        if (btn != null)
-        {
-            // Let IAPButton handle the purchase; we only disable when already owned.
-            btn.interactable = !isPurchased;
+            itemImage.sprite = shopItemData.GetItemIcon();
+            itemImage.enabled = itemImage.sprite != null;
         }
     }
 
-    [Button("Refresh Values")]
+#if UNITY_EDITOR
     public void ChangeValues()
     {
-        EnsureReferences();
-        UnsubscribeFromData();
-        SubscribeToData();
-        ApplyStateToUI();
-    }
-
-    public void OnIAPPurchaseComplete(Product product)
-    {
-        if (shopItemData == null) return;
-        if (isPurchased) { ApplyStateToUI(); return; }
-        // Optional: verify product.definition.id == shopItemData.GetProductId()
-        var id = shopItemData.GetItemId();
-        if (string.IsNullOrEmpty(id)) return;
-        ShopUnlocksManager.instance.Unlock(id);
-        isPurchased = true;
-        ApplyStateToUI();
-    }
-    
-#if UNITY_PURCHASING
-    // Hook this to IAPButton's On Purchase Complete (Product)
-    public void OnIAPPurchaseComplete(Product product)
-    {
-        if (shopItemData == null) return;
-        if (isPurchased) { ApplyStateToUI(); return; }
-        // Optional: verify product.definition.id == shopItemData.GetProductId()
-        var id = shopItemData.GetItemId();
-        if (string.IsNullOrEmpty(id)) return;
-        ShopUnlocksManager.Unlock(id);
-        isPurchased = true;
-        ApplyStateToUI();
-    }
-
-    // Hook this to IAPButton's On Purchase Failed (Product, PurchaseFailureReason)
-    public void OnIAPPurchaseFailed(Product product, PurchaseFailureReason reason)
-    {
-        // No state change; ensure UI remains interactive if not owned
         ApplyStateToUI();
     }
 #endif

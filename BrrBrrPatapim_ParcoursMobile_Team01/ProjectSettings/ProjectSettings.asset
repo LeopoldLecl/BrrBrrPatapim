@@ -941,7 +941,7 @@ PlayerSettings:
   cloudServicesEnabled:
     Purchasing: 1
     UNet: 1
-    Unity Ads: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -963,11 +963,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 5206b435-36a6-4952-8cdb-723db0d877d2
+  cloudProjectId: 12b71b27-7ffb-45be-9706-3e82c2a3acd9
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: BrrBrrPatapim_ParcoursMobile_Team01
-  organizationId: disturbedbanana
+  organizationId: leopoldlecl
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

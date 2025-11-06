@@ -15,57 +15,50 @@ namespace Script
     public class ShopUnlocksManager : MonoBehaviour
     {
         public static ShopUnlocksManager instance;
-        
-        [SerializeField] TextMeshProUGUI goldText;
-        
+
+        [Header("UI References")]
+        [SerializeField] private TextMeshProUGUI goldText;
+
+        [Header("Environment")]
         public string environment = "production";
- 
-        // async void Start() {
-        //     try {
-        //         var options = new InitializationOptions()
-        //             .SetEnvironmentName(environment);
-        //
-        //         await UnityServices.InitializeAsync(options);
-        //     }
-        //     catch (Exception exception) {
-        //         // An error occurred during initialization.
-        //         Debug.LogException(exception);
-        //     }
-        // }
-        
+
         private const string PlayerPrefsKey = "SHOP_UNLOCKS_JSON";
         private const string PlayerPrefsGoldKey = "SHOP_GOLD_AMOUNT";
+        private const string EquippedSkinKey = "EQUIPPED_SKIN_ID";
 
         private static HashSet<string> _unlockedCache;
         private static bool _loaded;
-        private static bool _ugsInitialized;
-        private static bool _ugsInitializing;
-        
-        [SerializeField]
-        private int goldAmount; // default 0
+
+        [SerializeField] private int goldAmount;
 
         public int GoldAmount
         {
-            get
-            {
-                return goldAmount;
-            }
-            private set
-            {
-                goldAmount = value;
-            }
+            get => goldAmount;
+            private set => goldAmount = value;
         }
 
         private void Awake()
         {
             instance ??= this;
-            // Load persisted gold on startup
+            LoadGold();
+            EnsureLoaded();
+            UpdateGoldUI();
+        }
+
+        private void Start()
+        {
+            UpdateGoldUI();
+        }
+
+        private void LoadGold()
+        {
             goldAmount = PlayerPrefs.GetInt(PlayerPrefsGoldKey, 0);
         }
 
         private void EnsureLoaded()
         {
             if (_loaded) return;
+
             var json = PlayerPrefs.GetString(PlayerPrefsKey, string.Empty);
             if (string.IsNullOrEmpty(json))
             {
@@ -100,9 +93,7 @@ namespace Script
             if (string.IsNullOrEmpty(id)) return;
             EnsureLoaded();
             if (_unlockedCache.Add(id))
-            {
                 Save();
-            }
         }
 
         public void Lock(string id)
@@ -110,20 +101,7 @@ namespace Script
             if (string.IsNullOrEmpty(id)) return;
             EnsureLoaded();
             if (_unlockedCache.Remove(id))
-            {
                 Save();
-            }
-        }
-
-        public void ClearAll()
-        {
-            _unlockedCache = new HashSet<string>();
-            _loaded = true;
-            PlayerPrefs.DeleteKey(PlayerPrefsKey);
-            // Reset gold and remove persisted value
-            if (instance != null) instance.GoldAmount = 0;
-            PlayerPrefs.DeleteKey(PlayerPrefsGoldKey);
-            PlayerPrefs.Save();
         }
 
         public void Save()
@@ -135,10 +113,50 @@ namespace Script
             PlayerPrefs.Save();
         }
 
-        // --- Gold persistence & helpers ---
+        [ContextMenu("Reset All Shop Data")]
+        public void ResetAll()
+        {
+            Debug.Log(" Reset complet du shop");
+
+            _unlockedCache = new HashSet<string>();
+            _loaded = true;
+            PlayerPrefs.DeleteKey(PlayerPrefsKey);
+            PlayerPrefs.DeleteKey(PlayerPrefsGoldKey);
+            PlayerPrefs.DeleteKey(EquippedSkinKey);
+            PlayerPrefs.Save();
+
+            goldAmount = 0;
+            UpdateGoldUI();
+
+            if (SkinsSelectionManager.Instance != null)
+            {
+                SkinsSelectionManager.Instance.SendMessage("SetEquippedSkin", null, SendMessageOptions.DontRequireReceiver);
+            }
+
+            var items = FindObjectsByType<ShopItem>(FindObjectsSortMode.None);
+            foreach (var item in items)
+            {
+                item.ForceLockedState(); 
+            }
+
+            if (SkinsSelectionManager.Instance != null)
+            {
+                SkinsSelectionManager.Instance.ForceUnequipAll();
+            }
+
+
+            Debug.Log(" Shop totalement réinitialisé (gold, unlocks, skins).");
+        }
+
+
+
+        public void CloseUI()
+        {
+            gameObject.SetActive(false);
+        }
+
         public static int GetGold()
         {
-            // If instance is alive, return its cached value; otherwise fetch from PlayerPrefs
             return instance != null ? instance.GoldAmount : PlayerPrefs.GetInt(PlayerPrefsGoldKey, 0);
         }
 
@@ -146,23 +164,15 @@ namespace Script
         {
             if (amount < 0) amount = 0;
             if (instance != null)
-            {
                 instance.GoldAmount = amount;
-            }
-            
-            
-            if (goldText != null)
-            {
-                goldText.text = goldAmount.ToString();
-            }
-            
+
             PlayerPrefs.SetInt(PlayerPrefsGoldKey, amount);
             PlayerPrefs.Save();
+            UpdateGoldUI();
         }
 
         public void AddGold(int delta)
         {
-            // Support negative delta; clamp at 0..int.MaxValue
             long newValue = (long)GetGold() + delta;
             if (newValue < 0) newValue = 0;
             if (newValue > int.MaxValue) newValue = int.MaxValue;
@@ -174,25 +184,27 @@ namespace Script
             if (cost < 0) cost = 0;
             int current = GetGold();
             if (current < cost) return false;
+
             SetGold(current - cost);
             return true;
         }
-        
+
+        private void UpdateGoldUI()
+        {
+            if (goldText != null)
+                goldText.text = $"{goldAmount} G";
+        }
+
         public void OnGoldPurchased(Product product)
         {
             if (product == null) return;
+
             if (product.definition.id == "product_gold_small")
-            {
                 AddGold(100);
-            }
             else if (product.definition.id == "product_gold_medium")
-            {
                 AddGold(250);
-            }
             else if (product.definition.id == "product_gold_large")
-            {
                 AddGold(600);
-            }
         }
     }
 }
