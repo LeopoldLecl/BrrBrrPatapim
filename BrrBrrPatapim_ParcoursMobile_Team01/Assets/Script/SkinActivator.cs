@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using Script.ScriptableObjects.Scripts;
 
 public class SkinActivator : MonoBehaviour
@@ -18,6 +19,8 @@ public class SkinActivator : MonoBehaviour
 
     [Header("Autres skins (activés selon le ShopItemScriptableObject équipé)")]
     [SerializeField] private SkinEntry[] skins;
+
+    private GameObject _activeSkin;
 
     private void Start()
     {
@@ -43,36 +46,46 @@ public class SkinActivator : MonoBehaviour
             : string.Empty;
 
         bool hasEquipped = !string.IsNullOrEmpty(equippedKey);
+        _activeSkin = null;
 
-        // Désactive/active les skins par défaut
         foreach (var def in defaultSkins)
-        {
             if (def != null)
                 def.SetActive(!hasEquipped);
-        }
-
-        // Active le bon skin
-        bool found = false;
 
         foreach (var entry in skins)
         {
-            if (entry.skinObject == null || entry.shopItem == null) continue;
+            if (entry.skinObject == null || entry.shopItem == null)
+                continue;
 
-            // Compare le skinKey du ScriptableObject au skin équipé
-            string key = entry.shopItem.GetSkinKey();
-            bool match = string.Equals(key, equippedKey, System.StringComparison.OrdinalIgnoreCase);
+            bool match = string.Equals(entry.shopItem.GetSkinKey(), equippedKey, System.StringComparison.OrdinalIgnoreCase);
             entry.skinObject.SetActive(match);
 
             if (match)
-            {
-                found = true;
-                Debug.Log($"[SkinActivator] Enabled {entry.skinObject.name} for skin '{key}'");
-            }
+                _activeSkin = entry.skinObject;
         }
 
-        if (!found && hasEquipped)
-            Debug.LogWarning($"[SkinActivator] Aucun skin trouvé correspondant à la clé '{equippedKey}'");
+        if (!hasEquipped)
+        {
+            if (defaultSkins != null && defaultSkins.Length > 0)
+                _activeSkin = defaultSkins[0];
+        }
 
         Debug.Log($"[SkinActivator] Active skin = {(hasEquipped ? equippedKey : "default")}");
+    }
+
+    /// <summary>
+    /// Retourne toutes les particules associées au skin actuellement actif.
+    /// </summary>
+    public List<ParticleSystem> GetActiveSkinParticles()
+    {
+        List<ParticleSystem> particles = new List<ParticleSystem>();
+
+        if (_activeSkin != null)
+        {
+            var found = _activeSkin.GetComponentsInChildren<ParticleSystem>(true);
+            particles.AddRange(found);
+        }
+
+        return particles;
     }
 }
