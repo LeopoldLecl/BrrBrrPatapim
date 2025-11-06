@@ -22,8 +22,8 @@ public class ScriptWagon : MonoBehaviour
     [Header("Audio & FX")]
     [SerializeField] private AudioSource screamSource;
     [SerializeField] private AudioClip screamSound;
-    [SerializeField] private ParticleSystem skidParticles;
     [SerializeField] private float screamThreshold = 1f;
+    [SerializeField] private ParticleSystem skidParticles;
     [SerializeField] private List<ParticleSystem> extraParticles;
 
     private List<Transform> _wagonsList = new List<Transform>();
@@ -36,6 +36,12 @@ public class ScriptWagon : MonoBehaviour
     private bool _isDescending;
     private bool _isBoosting;
     private bool _hasGameStarted;
+
+    private SkinActivator _skinActivator;
+
+    // --- Particle Set Runtime ---
+    private GameObject _activeParticleSet;
+    private List<ParticleSystem> _activeParticleSystems = new List<ParticleSystem>();
 
     public bool HasGameStarted
     {
@@ -54,6 +60,8 @@ public class ScriptWagon : MonoBehaviour
     {
         SpawnWagons(wagonsCount);
         _boostParticleSystem = GetComponentInChildren<ParticleSystem>();
+        _skinActivator = FindFirstObjectByType<SkinActivator>();
+        RefreshParticleSet();
     }
 
     private void Update()
@@ -78,9 +86,7 @@ public class ScriptWagon : MonoBehaviour
             {
                 RotateToX(targetRotationX);
                 _currentTargetRotationX = targetRotationX;
-
-                if (skidParticles) skidParticles.Play();
-                PlayAllParticles();
+                PlayCurrentParticleSet();
             }
         }
 
@@ -160,6 +166,68 @@ public class ScriptWagon : MonoBehaviour
         }
     }
 
+    // --- PARTICLE SET SYSTEM ---
+    public void RefreshParticleSet()
+    {
+        // Nettoyage de l’ancien set
+        if (_activeParticleSet != null)
+            Destroy(_activeParticleSet);
+
+        _activeParticleSystems.Clear();
+
+        var manager = ParticleSelectionManager.Instance;
+        if (manager == null) return;
+
+        string key = manager.GetEquippedParticleKey();
+        if (string.IsNullOrEmpty(key)) return;
+
+        var allSets = Resources.LoadAll<ParticleSetScriptableObject>("");
+        foreach (var set in allSets)
+        {
+            if (set.ParticleKey == key)
+            {
+                foreach (var prefab in set.ParticlePrefabs)
+                {
+                    if (prefab == null) continue;
+                    var go = Instantiate(prefab, transform);
+                    _activeParticleSystems.AddRange(go.GetComponentsInChildren<ParticleSystem>(true));
+                    _activeParticleSet = go;
+                }
+
+                Debug.Log($"[ScriptWagon] Loaded particle set: {key}");
+                return;
+            }
+        }
+
+        Debug.LogWarning($"[ScriptWagon] No particle set found for key '{key}'");
+    }
+
+    private void PlayCurrentParticleSet()
+    {
+        if (_activeParticleSystems != null && _activeParticleSystems.Count > 0)
+        {
+            foreach (var ps in _activeParticleSystems)
+                ps?.Play();
+        }
+        else
+        {
+            PlayDefaultParticles();
+        }
+    }
+
+    private void PlayDefaultParticles()
+    {
+        if (extraParticles != null)
+        {
+            foreach (var ps in extraParticles)
+                ps?.Play();
+        }
+
+        if (skidParticles != null)
+            skidParticles.Play();
+    }
+
+    // --- BOOST / PORTALS ---
     public void OnPortalTouched(PortalType portal, int value)
     {
         if (_isBoosting) return;
@@ -218,18 +286,5 @@ public class ScriptWagon : MonoBehaviour
         _isBoosting = false;
         _boostParticleSystem?.Stop();
         RotateToX(Input.touchCount > 0 ? 45f : -45f);
-    }
-
-    public void PlayAllParticles()
-    {
-        if (extraParticles == null || extraParticles.Count == 0) return;
-
-        foreach (var particle in extraParticles)
-        {
-            if (particle != null)
-            {
-                particle.Play();
-            }
-        }
     }
 }
