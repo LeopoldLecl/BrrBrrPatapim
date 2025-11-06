@@ -52,13 +52,16 @@ public class SkinsSelectionManager : MonoBehaviour
                         Debug.Log($"[Restore] Match found! Restoring {item.name}");
                         currentEquippedItem = item;
                         currentEquippedItem.SetEquipped(true);
+
+                        //  On notifie le SkinActivator APRÈS avoir restauré le skin
+                        NotifyActivator();
                         yield break;
                     }
                 }
             }
 
             attempts++;
-            yield return new WaitForSeconds(0.1f); 
+            yield return new WaitForSeconds(0.1f);
         }
 
         Debug.LogWarning("[Restore]  Aucun ShopItem trouvé après plusieurs tentatives.");
@@ -77,6 +80,8 @@ public class SkinsSelectionManager : MonoBehaviour
                 PlayerPrefs.DeleteKey(EquippedSkinKey);
                 PlayerPrefs.Save();
             }
+
+            NotifyActivator();
             return;
         }
 
@@ -94,6 +99,7 @@ public class SkinsSelectionManager : MonoBehaviour
         }
 
         Debug.Log($" Skin équipé sauvegardé : {equippedSkinId}");
+        NotifyActivator();
     }
 
     public bool IsEquipped(ShopItem item)
@@ -116,11 +122,22 @@ public class SkinsSelectionManager : MonoBehaviour
         PlayerPrefs.Save();
 
         Debug.Log(" Skin déséquipé et supprimé des PlayerPrefs");
+        NotifyActivator();
     }
 
     public void RestoreEquippedSkin()
     {
         if (!string.IsNullOrEmpty(equippedSkinId))
             StartCoroutine(RestoreEquippedSkinWhenReady());
+    }
+
+    private void NotifyActivator()
+    {
+        var activator = FindFirstObjectByType<SkinActivator>();
+        if (activator != null)
+        {
+            activator.Refresh();
+            Debug.Log("[SkinsSelectionManager] SkinActivator notified of new skin.");
+        }
     }
 }

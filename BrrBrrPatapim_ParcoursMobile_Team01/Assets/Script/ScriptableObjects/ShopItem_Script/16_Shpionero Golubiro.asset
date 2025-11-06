@@ -15,7 +15,8 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 8f6c1063de25d6c469cfeac5bda4deca, type: 3}
   itemPrice: 100
   id: 0514b85a574b43a0b2c3116d9cef2535
-  productId: 
+  skinKey: 16_Shpionero Golubiro
+  productId: 16
   onUnlocked:
     m_PersistentCalls:
       m_Calls: []
