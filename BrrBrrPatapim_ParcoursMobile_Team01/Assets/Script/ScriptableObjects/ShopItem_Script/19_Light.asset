@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4af13635be917474da4138a129e42ac6, type: 3}
-  m_Name: 4_Brr_Brr_Patapim_ShopItemScriptableObject
-  m_EditorClassIdentifier: Assembly-CSharp::ShopItemScriptableObject
+  m_Name: 19_Light
+  m_EditorClassIdentifier: Assembly-CSharp::Script.ScriptableObjects.Scripts.ShopItemScriptableObject
   itemIcon: {fileID: 21300000, guid: 4776a42d0f421a649930d9d34e469e02, type: 3}
-  itemPrice: 200
-  id: 7e6b5b252c434a93945bf5c0fd227395
-  skinKey: 4_Brr_Brr_Patapim_ShopItemScriptableObject
-  productId: 4
+  itemPrice: 250
+  id: cb5d25d36f5947e08c49fa726bb88681
+  productId: 
   onUnlocked:
     m_PersistentCalls:
       m_Calls: []

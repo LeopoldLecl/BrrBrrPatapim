@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af13635be917474da4138a129e42ac6, type: 3}
   m_Name: 11_Bobrito Bandito
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemScriptableObject
-  itemIcon: {fileID: 21300000, guid: 578b3e97b3252f64abfb95630f9dab96, type: 3}
-  itemPrice: 800
+  itemIcon: {fileID: 21300000, guid: 6858794bda90d4a40b085d52e4ec8764, type: 3}
+  itemPrice: 40
   id: e6e2e517bbe140b4afff9fa8279ca16a
   skinKey: 11_Bobrito Bandito
   productId: 11

@@ -191,7 +191,7 @@ namespace Script
             foreach (var text in goldTexts)
             {
                 if (text != null)
-                    text.text = $"{goldAmount} G";
+                    text.text = $"{goldAmount}";
             }
         }
 
@@ -202,7 +202,7 @@ namespace Script
             if (!goldTexts.Contains(text))
                 goldTexts.Add(text);
 
-            text.text = $"{goldAmount} G";
+            text.text = $"{goldAmount}";
         }
 
         //  Permet d’enlever un texte si tu détruis un objet à runtime
