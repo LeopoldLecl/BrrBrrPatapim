@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af13635be917474da4138a129e42ac6, type: 3}
   m_Name: 2_Tralalero Tralala
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemScriptableObject
-  itemIcon: {fileID: 21300000, guid: f33bf955de2eb3b4cb2961ace8587e57, type: 3}
+  itemIcon: {fileID: 21300000, guid: 4776a42d0f421a649930d9d34e469e02, type: 3}
   itemPrice: 500
   id: d42ec218ee2d49839326b060cb51e2df
   productId: 

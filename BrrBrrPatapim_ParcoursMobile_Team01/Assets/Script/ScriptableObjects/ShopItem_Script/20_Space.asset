@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4af13635be917474da4138a129e42ac6, type: 3}
-  m_Name: 7_Chimpanzini Bananini
-  m_EditorClassIdentifier: Assembly-CSharp::ShopItemScriptableObject
+  m_Name: 20_Space
+  m_EditorClassIdentifier: Assembly-CSharp::Script.ScriptableObjects.Scripts.ShopItemScriptableObject
   itemIcon: {fileID: 21300000, guid: d4c4a6d4af753b2459e87e147fc0aebe, type: 3}
-  itemPrice: 80
-  id: 15f0ee38231849c7ad0a28be55aba28f
+  itemPrice: 100
+  id: 517e8014e260493ab0b9249ee677ce11
   productId: 
   onUnlocked:
     m_PersistentCalls:

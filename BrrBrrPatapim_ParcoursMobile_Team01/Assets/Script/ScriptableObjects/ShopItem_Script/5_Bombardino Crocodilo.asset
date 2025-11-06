@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af13635be917474da4138a129e42ac6, type: 3}
   m_Name: 5_Bombardino Crocodilo
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemScriptableObject
-  itemIcon: {fileID: 21300000, guid: a247bf616c4a2be42bce71128122bdd4, type: 3}
+  itemIcon: {fileID: 21300000, guid: 4776a42d0f421a649930d9d34e469e02, type: 3}
   itemPrice: 100
   id: 02cd68016dfb4e5a9ccf2a52668464f9
   productId: 
