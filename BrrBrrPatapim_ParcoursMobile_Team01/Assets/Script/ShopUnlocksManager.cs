@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Purchasing;
+using System.Collections;
 
 namespace Script
 {
@@ -17,7 +18,8 @@ namespace Script
         public static ShopUnlocksManager instance;
 
         [Header("UI References")]
-        [SerializeField] private TextMeshProUGUI goldText;
+        [Tooltip("Tous les textes où afficher la quantité d’or dans le jeu.")]
+        [SerializeField] private List<TextMeshProUGUI> goldTexts = new List<TextMeshProUGUI>();
 
         [Header("Environment")]
         public string environment = "production";
@@ -48,6 +50,13 @@ namespace Script
         private void Start()
         {
             UpdateGoldUI();
+            StartCoroutine(WaitFor1SecCoroutine());
+        }
+
+        IEnumerator WaitFor1SecCoroutine()
+        {
+            yield return new WaitForSeconds(0.1f);
+            gameObject.SetActive(false);
         }
 
         private void LoadGold()
@@ -113,13 +122,15 @@ namespace Script
             PlayerPrefs.Save();
         }
 
+        //  Reset complet : or, unlocks, équipements
         [ContextMenu("Reset All Shop Data")]
         public void ResetAll()
         {
-            Debug.Log(" Reset complet du shop");
+            Debug.Log(" Reset complet du shop...");
 
             _unlockedCache = new HashSet<string>();
             _loaded = true;
+
             PlayerPrefs.DeleteKey(PlayerPrefsKey);
             PlayerPrefs.DeleteKey(PlayerPrefsGoldKey);
             PlayerPrefs.DeleteKey(EquippedSkinKey);
@@ -129,32 +140,16 @@ namespace Script
             UpdateGoldUI();
 
             if (SkinsSelectionManager.Instance != null)
-            {
-                SkinsSelectionManager.Instance.SendMessage("SetEquippedSkin", null, SendMessageOptions.DontRequireReceiver);
-            }
+                SkinsSelectionManager.Instance.ForceUnequipAll();
 
             var items = FindObjectsByType<ShopItem>(FindObjectsSortMode.None);
             foreach (var item in items)
-            {
-                item.ForceLockedState(); 
-            }
-
-            if (SkinsSelectionManager.Instance != null)
-            {
-                SkinsSelectionManager.Instance.ForceUnequipAll();
-            }
-
+                item.ForceLockedState();
 
             Debug.Log(" Shop totalement réinitialisé (gold, unlocks, skins).");
         }
 
-
-
-        public void CloseUI()
-        {
-            gameObject.SetActive(false);
-        }
-
+        // --- Gestion de l'or ---
         public static int GetGold()
         {
             return instance != null ? instance.GoldAmount : PlayerPrefs.GetInt(PlayerPrefsGoldKey, 0);
@@ -168,6 +163,7 @@ namespace Script
 
             PlayerPrefs.SetInt(PlayerPrefsGoldKey, amount);
             PlayerPrefs.Save();
+
             UpdateGoldUI();
         }
 
@@ -189,10 +185,31 @@ namespace Script
             return true;
         }
 
+        //  Met à jour tous les textes de gold référencés
         private void UpdateGoldUI()
         {
-            if (goldText != null)
-                goldText.text = $"{goldAmount} G";
+            foreach (var text in goldTexts)
+            {
+                if (text != null)
+                    text.text = $"{goldAmount} G";
+            }
+        }
+
+        //  Permet d’enregistrer dynamiquement un texte en runtime
+        public void RegisterGoldText(TextMeshProUGUI text)
+        {
+            if (text == null) return;
+            if (!goldTexts.Contains(text))
+                goldTexts.Add(text);
+
+            text.text = $"{goldAmount} G";
+        }
+
+        //  Permet d’enlever un texte si tu détruis un objet à runtime
+        public void UnregisterGoldText(TextMeshProUGUI text)
+        {
+            if (text == null) return;
+            goldTexts.Remove(text);
         }
 
         public void OnGoldPurchased(Product product)
