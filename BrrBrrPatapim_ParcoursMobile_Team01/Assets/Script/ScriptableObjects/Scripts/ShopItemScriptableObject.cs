@@ -14,21 +14,35 @@ namespace Script.ScriptableObjects.Scripts
         [SerializeField, Tooltip("Unique ID for this shop item. Generated automatically if empty.")]
         private string id;
 
-        [SerializeField, Tooltip("Unity IAP Product ID configured in the store (optional).")]
+        [Header("Skin / Gameplay Key")]
+        [SerializeField, Tooltip("Nom lisible pour identifier ce skin dans le jeu (ex: 'SkinRed', 'SkinBlue').")]
+        private string skinKey;
+
+        [SerializeField, Tooltip("Unity IAP Product ID configuré dans le store (optionnel).")]
         private string productId;
 
         [Header("Unlock Event")]
-        [Tooltip("Called when this item is successfully unlocked or purchased.")]
+        [Tooltip("Appelé lorsque cet item est débloqué ou acheté.")]
         [SerializeField] private UnityEvent onUnlocked;
 
-        // --- Events for editor auto-refresh ---
+        // --- Events pour l’éditeur ---
         public event Action<ShopItemScriptableObject> Changed;
         public event Action<Sprite> IconChanged;
 
         // --- Getters ---
         public Sprite GetItemIcon() => itemIcon;
         public int GetItemPrice() => itemPrice;
+
+        /// <summary>
+        /// ID unique (UUID) utilisé pour la sauvegarde interne
+        /// </summary>
         public string GetItemId() => id;
+
+        /// <summary>
+        /// Nom logique lisible pour le gameplay (SkinActivator, etc.)
+        /// </summary>
+        public string GetSkinKey() => skinKey;
+
         public string GetProductId() => productId;
 
         // --- Setters ---
@@ -53,6 +67,13 @@ namespace Script.ScriptableObjects.Scripts
             RaiseChanged();
         }
 
+        public void SetSkinKey(string newSkinKey)
+        {
+            if (skinKey == newSkinKey) return;
+            skinKey = newSkinKey;
+            RaiseChanged();
+        }
+
         /// <summary>
         /// Appelé quand le joueur débloque ou achète cet item.
         /// Déclenche tous les callbacks assignés dans l'inspecteur.
@@ -65,10 +86,17 @@ namespace Script.ScriptableObjects.Scripts
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            // Auto-génère un ID unique si manquant
+            //  Auto-génère un ID unique si manquant
             if (string.IsNullOrEmpty(id))
             {
                 id = Guid.NewGuid().ToString("N");
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+
+            //  Si pas de skinKey, prend le nom du ScriptableObject
+            if (string.IsNullOrEmpty(skinKey))
+            {
+                skinKey = name;
                 UnityEditor.EditorUtility.SetDirty(this);
             }
 

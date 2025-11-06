@@ -43,13 +43,10 @@ public class ShopItem : MonoBehaviour
             buyButton.onClick.RemoveListener(OnButtonClick);
     }
 
-
     public void ForceLockedState()
     {
-        // Déséquipe visuellement
         SetEquipped(false);
 
-        // Marque comme non acheté
         var id = GetItemId();
         if (!string.IsNullOrEmpty(id))
         {
@@ -58,8 +55,6 @@ public class ShopItem : MonoBehaviour
 
         ApplyStateToUI();
     }
-
-
 
     private void InitializeState()
     {
@@ -75,7 +70,7 @@ public class ShopItem : MonoBehaviour
             }
         }
 
-        string id = shopItemData.GetItemId();
+        string id = GetItemId();
         isPurchased = ShopUnlocksManager.instance.IsUnlocked(id);
         ApplyStateToUI();
     }
@@ -108,17 +103,28 @@ public class ShopItem : MonoBehaviour
             return;
         }
 
-        ShopUnlocksManager.instance.Unlock(shopItemData.GetItemId());
+        ShopUnlocksManager.instance.Unlock(GetItemId());
         isPurchased = true;
         shopItemData.InvokeUnlockEvent();
         ApplyStateToUI();
     }
 
+    /// <summary>
+    /// Retourne l'identifiant lisible du skin s'il existe, sinon l'ID unique.
+    /// </summary>
     public string GetItemId()
     {
-        return shopItemData != null ? shopItemData.GetItemId() : string.Empty;
-    }
+        if (shopItemData == null)
+            return string.Empty;
 
+        // On privilégie la clé lisible (skinKey)
+        string key = shopItemData.GetSkinKey();
+        if (!string.IsNullOrEmpty(key))
+            return key;
+
+        // Sinon on retourne l'ID interne (UUID)
+        return shopItemData.GetItemId();
+    }
 
     private void ApplyStateToUI()
     {
