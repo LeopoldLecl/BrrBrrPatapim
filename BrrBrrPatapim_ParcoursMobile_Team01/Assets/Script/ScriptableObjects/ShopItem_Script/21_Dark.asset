@@ -15,6 +15,7 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: d4c4a6d4af753b2459e87e147fc0aebe, type: 3}
   itemPrice: 80
   id: 1930db4997da4bc28fbc8e26f12f3daa
+  skinKey: 21_Dark
   productId: 
   onUnlocked:
     m_PersistentCalls:
