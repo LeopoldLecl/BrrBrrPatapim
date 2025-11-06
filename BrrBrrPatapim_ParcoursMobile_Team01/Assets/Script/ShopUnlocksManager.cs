@@ -55,7 +55,7 @@ namespace Script
 
         IEnumerator WaitFor1SecCoroutine()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             gameObject.SetActive(false);
         }
 

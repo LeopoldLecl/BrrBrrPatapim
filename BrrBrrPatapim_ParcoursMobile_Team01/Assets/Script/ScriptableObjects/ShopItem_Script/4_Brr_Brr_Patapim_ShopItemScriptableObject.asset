@@ -15,7 +15,8 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 4776a42d0f421a649930d9d34e469e02, type: 3}
   itemPrice: 200
   id: 7e6b5b252c434a93945bf5c0fd227395
-  productId: 
+  skinKey: 4_Brr_Brr_Patapim_ShopItemScriptableObject
+  productId: 4
   onUnlocked:
     m_PersistentCalls:
       m_Calls: []
