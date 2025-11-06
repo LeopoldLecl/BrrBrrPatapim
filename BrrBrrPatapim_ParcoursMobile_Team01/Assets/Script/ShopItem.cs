@@ -59,10 +59,6 @@ public class ShopItem : MonoBehaviour
         ApplyStateToUI();
     }
 
-    public void CloseUI()
-    {
-        gameObject.SetActive(false);
-    }
 
 
     private void InitializeState()
