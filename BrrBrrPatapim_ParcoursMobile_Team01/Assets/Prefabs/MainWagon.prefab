@@ -6191,10 +6191,11 @@ MonoBehaviour:
   wagonsCount: 10
   firstWagonSpacing: 0.01
   rotateButton: 32
+  _click: {fileID: 3001919216989983466, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   screamSource: {fileID: 4519599417402136392}
   screamSound: {fileID: 8300000, guid: 94578161c5842a841b84c32bd67e1f42, type: 3}
-  skidParticles: {fileID: 0}
   screamThreshold: 0.2
+  skidParticles: {fileID: 0}
   extraParticles:
   - {fileID: 8434834665222611899}
   - {fileID: 4914551276523328113}

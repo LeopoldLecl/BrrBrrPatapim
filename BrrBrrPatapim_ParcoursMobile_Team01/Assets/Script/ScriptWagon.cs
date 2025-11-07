@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 using static GameplayEnums;
 
 public class ScriptWagon : MonoBehaviour
@@ -19,6 +20,11 @@ public class ScriptWagon : MonoBehaviour
     [SerializeField] private float firstWagonSpacing = 3f;
     [SerializeField] private KeyCode rotateButton = KeyCode.Space;
 
+
+    //[SerializeField] private InputActionReference _click;
+    
+    
+    
     [Header("Audio & FX")]
     [SerializeField] private AudioSource screamSource;
     [SerializeField] private AudioClip screamSound;
@@ -76,7 +82,8 @@ public class ScriptWagon : MonoBehaviour
 
         float targetRotationX = (Input.touchCount > 0
 #if UNITY_EDITOR || UNITY_STANDALONE
-            || Input.GetKey(rotateButton)
+          || Input.GetKey(rotateButton)
+          //||_click.action.IsPressed()
 #endif
         ) ? 45f : -45f;
 
@@ -169,7 +176,7 @@ public class ScriptWagon : MonoBehaviour
     // --- PARTICLE SET SYSTEM ---
     public void RefreshParticleSet()
     {
-        // Nettoyage de l’ancien set
+        // Nettoyage de lï¿½ancien set
         if (_activeParticleSet != null)
             Destroy(_activeParticleSet);
 
