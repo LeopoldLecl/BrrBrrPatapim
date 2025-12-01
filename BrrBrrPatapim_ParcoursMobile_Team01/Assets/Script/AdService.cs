@@ -59,7 +59,7 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
 
     // Reset static singleton when Domain Reload is disabled (Editor Enter Play Mode Options)
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ResetStatics() => _instance = null;
+    private static void ResetStatics() => _instance = null; 
 
     // Persist across scenes
     private void Awake()
@@ -244,9 +244,15 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
             LogEvent($"Rewarded: {showCompletionState}");
             PlayerAnalyticsTracker.RecordEventSafe($"ad_rewarded_{showCompletionState}");
             if (showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+            {
                 OnRewardedCompleted?.Invoke();
+                //Red hardcoded for now
+                GameObject.FindFirstObjectByType<ShopUnlocksManager>().AddGold(5);
+            }
             else if (showCompletionState == UnityAdsShowCompletionState.SKIPPED)
+            {
                 OnRewardedSkipped?.Invoke();
+            }
         }
         else if (placementId == interstitialPlacementId)
         {

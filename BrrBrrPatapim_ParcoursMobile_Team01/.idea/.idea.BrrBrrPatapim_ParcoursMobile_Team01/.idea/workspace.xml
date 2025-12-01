@@ -6,7 +6,82 @@
   <component name="ChangeListManager">
     <list default="true" id="0d0776fe-eb91-4e7d-ae76-77465e9ebfd4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BrrBrrPatapim_ParcoursMobile_Team01/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BrrBrrPatapim_ParcoursMobile_Team01/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/EndGameScores.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EndGameScores.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/source.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/source.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Arm_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Arm_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Arm_Normal_OpenGL.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Arm_Normal_OpenGL.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Bober_Mixed_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Bober_Mixed_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/BodyBase_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/BodyBase_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/BodyBase_D.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/BodyBase_D.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/BodyBase_R.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/BodyBase_R.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Capuchino_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Capuchino_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Capuchino_Mixed_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Capuchino_Mixed_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Capuchino_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Capuchino_Roughness.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Costume_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Costume_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Costume_Mixed_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Costume_Mixed_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Engine.002_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Engine.002_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Engine.002_Normal_OpenGL.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Engine.002_Normal_OpenGL.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/FED2_low_FED2_BaseColor.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/FED2_low_FED2_BaseColor.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/FED2_low_FED2_Metallic.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/FED2_low_FED2_Metallic.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/FED2_low_FED2_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/FED2_low_FED2_Roughness.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Fins.002_Normal_OpenGL.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Fins.002_Normal_OpenGL.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Fusil.002_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Fusil.002_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Fusil.002_Normal_OpenGL.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Fusil.002_Normal_OpenGL.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Goose_Canada.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Goose_Canada.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/HeadBase_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/HeadBase_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/HeadBase_D.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/HeadBase_D.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/HeadBase_R.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/HeadBase_R.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Hull_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Hull_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Hull_TX.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Hull_TX.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Katana_albedo.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Katana_albedo.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Katana_metallic.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Katana_metallic.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Katana_roughness.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Katana_roughness.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Kirkar_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Kirkar_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Kirkar_Mixed_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Kirkar_Mixed_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Kirkar_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Kirkar_Roughness.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/La_Vaca_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/La_Vaca_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/La_Vaca_Mixed_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/La_Vaca_Mixed_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/La_Vaca_Normal_OpenGL.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/La_Vaca_Normal_OpenGL.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Mateo_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Mateo_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Mateo_Mixed_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Mateo_Mixed_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Mateo_Normal_OpenGL.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Mateo_Normal_OpenGL.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Mateo_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Mateo_Roughness.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Material.002_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Material.002_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Material.002_Normal_OpenGL.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Material.002_Normal_OpenGL.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Material_baseColor.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Material_baseColor.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Pinguin_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Pinguin_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Pinguin_Mixed_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Pinguin_Mixed_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Pinguin_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Pinguin_Roughness.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Shpioniro_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Shpioniro_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Shpioniro_Mixed_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Shpioniro_Mixed_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Shpioniro_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Shpioniro_Roughness.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tail.002_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tail.002_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tail.002_Normal_OpenGL.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tail.002_Normal_OpenGL.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tralala_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tralala_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tralala_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tralala_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tralala_N.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tralala_N.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tralala_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/Tralala_Roughness.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/WaTER_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/WaTER_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/WaTER_Mixed_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/WaTER_Mixed_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/WaTER_Normal_DirectX.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/WaTER_Normal_DirectX.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/WaTER_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/WaTER_Roughness.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/crocodile_v01body_blinn.001_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/crocodile_v01body_blinn.001_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/crocodile_v01body_blinn.001_Normal_OpenGL.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/crocodile_v01body_blinn.001_Normal_OpenGL.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/crocodile_v01body_blinn_Base_color.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/crocodile_v01body_blinn_Base_color.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/crocodile_v01body_blinn_Mixed_AO.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/crocodile_v01body_blinn_Mixed_AO.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/crocodile_v01body_blinn_Roughness.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/crocodile_v01body_blinn_Roughness.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/prop_roll.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model_To_Integer/textures/prop_roll.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/--Canvas--.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/--Canvas--.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Goldpanel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Goldpanel.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/ShopPanel 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/ShopPanel 2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/IAPProductCatalog.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/IAPProductCatalog.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SceneFinale.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SceneFinale.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/AdService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/AdService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/ShopUnlocksManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/ShopUnlocksManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +95,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/ConventionDeGeneve.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/AdService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/ShopUnlocksManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@a7b997f68a1d/Runtime/Advertisement/Platform/Editor/Placeholder.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -30,25 +107,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;apagnan&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "Device#class com.jetbrains.rider.plugins.unity.run.devices.UnityUsbDeviceKind#com.jetbrains.rider.plugins.unity.run.devices.UnityDevicesProvider#Unity Attach to Device: Attach to Device": "AndroidPlayer(Samsung SM-A336B)",
+    "DeviceKind#com.jetbrains.rider.plugins.unity.run.devices.UnityDevicesProvider": "USB Devices",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Unity Attach to Device.Attach to Device.executor": "Debug",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+}]]></component>
+  <component name="RunManager" selected="Unity Attach to Device.Attach to Device">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.45f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/6000.2.10f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;C:\Github Repos\BrrBrrPatapim\BrrBrrPatapim_ParcoursMobile_Team01&quot; -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Github Repos\BrrBrrPatapim\BrrBrrPatapim_ParcoursMobile_Team01" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -56,10 +136,11 @@
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
       <option name="PTY_MODE" value="Auto" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.45f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/6000.2.10f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;C:\Github Repos\BrrBrrPatapim\BrrBrrPatapim_ParcoursMobile_Team01&quot; -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Github Repos\BrrBrrPatapim\BrrBrrPatapim_ParcoursMobile_Team01" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -67,6 +148,7 @@
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
       <option name="PTY_MODE" value="Auto" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
@@ -83,10 +165,10 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="8476">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="67283">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="8476" />
+      <option name="pid" value="67283" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
         <list>
@@ -97,6 +179,17 @@
         <list />
       </option>
       <option name="useMixedMode" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Device" type="UnityDevicePlayer" factoryName="UnityAttachToDevicePlayer">
+      <option name="androidPackageUid" value="10330" />
+      <option name="deviceId" value="RZCT91L9KFX" />
+      <option name="deviceName" value="Samsung SM-A336B" />
+      <option name="host" value="127.0.0.1" />
+      <option name="packageName" value="com.UnityTechnologies.IIMJV.RollerCoaster3D" />
+      <option name="playerId" value="AndroidADBPlayer(RZCT91L9KFX)" />
+      <option name="playerInstanceId" value="com.UnityTechnologies.IIMJV.RollerCoaster3D" />
+      <option name="port" value="56917" />
       <method v="2" />
     </configuration>
   </component>
@@ -110,6 +203,8 @@
       <workItem from="1747661685880" duration="1669000" />
       <workItem from="1747665984957" duration="5117000" />
       <workItem from="1747734824646" duration="5730000" />
+      <workItem from="1763632779831" duration="1389000" />
+      <workItem from="1763972769343" duration="3197000" />
     </task>
     <servers />
   </component>
@@ -141,6 +236,32 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/AdService.cs</url>
+          <line>247</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Script/AdService.cs" containingFunctionPresentation="Method 'OnUnityAdsShowComplete'">
+            <startOffsets>
+              <option value="8379" />
+            </startOffsets>
+            <endOffsets>
+              <option value="8409" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Script/AdService.cs</url>
+          <line>240</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Script/AdService.cs" containingFunctionPresentation="Method 'OnUnityAdsShowComplete'">
+            <startOffsets>
+              <option value="8036" />
+            </startOffsets>
+            <endOffsets>
+              <option value="8075" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

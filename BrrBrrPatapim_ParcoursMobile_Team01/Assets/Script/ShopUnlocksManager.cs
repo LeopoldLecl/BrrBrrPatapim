@@ -18,7 +18,7 @@ namespace Script
         public static ShopUnlocksManager instance;
 
         [Header("UI References")]
-        [Tooltip("Tous les textes où afficher la quantité d’or dans le jeu.")]
+        [Tooltip("Tous les textes oï¿½ afficher la quantitï¿½ dï¿½or dans le jeu.")]
         [SerializeField] private List<TextMeshProUGUI> goldTexts = new List<TextMeshProUGUI>();
 
         [Header("Environment")]
@@ -50,7 +50,7 @@ namespace Script
         private void Start()
         {
             UpdateGoldUI();
-            StartCoroutine(WaitFor1SecCoroutine());
+            //StartCoroutine(WaitFor1SecCoroutine());
         }
 
         IEnumerator WaitFor1SecCoroutine()
@@ -122,7 +122,7 @@ namespace Script
             PlayerPrefs.Save();
         }
 
-        //  Reset complet : or, unlocks, équipements
+        //  Reset complet : or, unlocks, ï¿½quipements
         [ContextMenu("Reset All Shop Data")]
         public void ResetAll()
         {
@@ -146,7 +146,7 @@ namespace Script
             foreach (var item in items)
                 item.ForceLockedState();
 
-            Debug.Log(" Shop totalement réinitialisé (gold, unlocks, skins).");
+            Debug.Log(" Shop totalement rï¿½initialisï¿½ (gold, unlocks, skins).");
         }
 
         // --- Gestion de l'or ---
@@ -185,17 +185,17 @@ namespace Script
             return true;
         }
 
-        //  Met à jour tous les textes de gold référencés
+        //  Met ï¿½ jour tous les textes de gold rï¿½fï¿½rencï¿½s
         private void UpdateGoldUI()
         {
             foreach (var text in goldTexts)
             {
                 if (text != null)
-                    text.text = $"{goldAmount}";
+                    text.text = $"{instance.GoldAmount}";
             }
         }
 
-        //  Permet d’enregistrer dynamiquement un texte en runtime
+        //  Permet dï¿½enregistrer dynamiquement un texte en runtime
         public void RegisterGoldText(TextMeshProUGUI text)
         {
             if (text == null) return;
@@ -205,7 +205,7 @@ namespace Script
             text.text = $"{goldAmount}";
         }
 
-        //  Permet d’enlever un texte si tu détruis un objet à runtime
+        //  Permet dï¿½enlever un texte si tu dï¿½truis un objet ï¿½ runtime
         public void UnregisterGoldText(TextMeshProUGUI text)
         {
             if (text == null) return;
