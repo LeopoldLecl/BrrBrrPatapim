@@ -267,12 +267,12 @@ PlayerSettings:
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
   useCustomGradlePropertiesTemplate: 1
-  useCustomGradleSettingsTemplate: 0
+  useCustomGradleSettingsTemplate: 1
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 2
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: Downloads/user_IIMjv1234!_brrbrr.keystore'
+  AndroidKeystoreName: '{dedicated}: Downloads/user.keystore'
   AndroidKeyaliasName: iim
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidEnableArm64MTE: 0

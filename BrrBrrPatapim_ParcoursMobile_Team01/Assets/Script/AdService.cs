@@ -16,6 +16,7 @@ using UnityEngine.Advertisements;
 [DefaultExecutionOrder(-1000)]
 public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
 {
+    string _currentReward = "";
     // Placements (match your Unity Dashboard)
     [Header("Placements")]
     [SerializeField] private string interstitialPlacementId = "Interstitial_Android";
@@ -99,8 +100,10 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
     public static void SetTestMode(bool enabled) { Instance.testMode = enabled; }
 
     // ---------- Instance implementation ----------
-    public void Initialize()
+    public async void Initialize()
     {
+        await Awaitable.WaitForSecondsAsync(10f);
+        
 #if UNITY_ANDROID
         _gameId = androidGameId;
 #elif UNITY_IOS
@@ -124,11 +127,6 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
  
     public void LoadRewardedAd()
     {
-        if (!Advertisement.isInitialized)
-        {
-            DebugLog("Init on LoadRewarded");
-            Initialize();
-        }
         DebugLog($"Load rwd: {rewardedPlacementId}");
         Advertisement.Load(rewardedPlacementId, this);
     }
@@ -175,6 +173,8 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
     {
         // Keep quiet unless verbose
         DebugLog("Init complete");
+
+        LoadRewardedAd();
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
@@ -247,7 +247,15 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
             {
                 OnRewardedCompleted?.Invoke();
                 //Red hardcoded for now
-                GameObject.FindFirstObjectByType<ShopUnlocksManager>().AddGold(5);
+                if (_currentReward == "wheel")
+                {
+                    GameObject.FindFirstObjectByType<BonusWheel>().Spin();
+                    SetCurrentReward("");
+                }
+                else
+                {
+                    GameObject.FindFirstObjectByType<ShopUnlocksManager>().AddGold(5);
+                }
             }
             else if (showCompletionState == UnityAdsShowCompletionState.SKIPPED)
             {
@@ -311,5 +319,10 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
     private void OnDestroy()
     {
         if (_instance == this) _instance = null;
+    }
+    
+    public void SetCurrentReward(string reward)
+    {
+        _currentReward = reward;
     }
 }
