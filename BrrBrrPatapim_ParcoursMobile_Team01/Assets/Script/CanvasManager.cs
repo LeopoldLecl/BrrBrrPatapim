@@ -15,6 +15,7 @@ namespace Script
         [SerializeField] private GameObject menuUI;
         [SerializeField] private GameObject gameUI;
         [SerializeField] private GameObject postGameUI;
+        [SerializeField] private GameObject bonusWheelUI;
 
         [Header("Cinemachine")]
         [SerializeField] private CinemachineCamera gameplayCamera;
@@ -86,6 +87,11 @@ namespace Script
             }
         }
 
+        public void OpenWheel()
+        {
+            bonusWheelUI.SetActive(true);
+        }
+        
         public void RestartGame()
         {
             PlayerAnalyticsTracker.RecordEventSafe("ui_restart");
