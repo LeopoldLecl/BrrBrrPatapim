@@ -65,13 +65,15 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
     // Persist across scenes
     private void Awake()
     {
-        if (_instance != null && _instance != this)
+        if (_instance != null)
         {
             Destroy(gameObject);
             return;
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
+        
+        Initialize();
     }
 
     private static void EnsureInstance()
@@ -91,18 +93,11 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
         DontDestroyOnLoad(go);
     }
 
-    // ---------- Static API ----------
-    public static void InitializeAds() => Instance.Initialize();
-    public static void LoadRewarded() => Instance.LoadRewardedAd();
-    public static void ShowRewarded() => Instance.ShowRewardedAd();
-    public static void LoadInterstitial() => Instance.LoadInterstitialAd();
-    public static void ShowInterstitial() => Instance.ShowInterstitialAd();
-    public static void SetTestMode(bool enabled) { Instance.testMode = enabled; }
 
     // ---------- Instance implementation ----------
     public async void Initialize()
     {
-        await Awaitable.WaitForSecondsAsync(10f);
+        await Awaitable.WaitForSecondsAsync(1f);
         
 #if UNITY_ANDROID
         _gameId = androidGameId;
@@ -148,8 +143,7 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
     {
         if (!Advertisement.isInitialized)
         {
-            DebugLog("Init on LoadInter");
-            Initialize();
+            return;
         }
         DebugLog($"Load inter: {interstitialPlacementId}");
         Advertisement.Load(interstitialPlacementId, this);
@@ -288,7 +282,6 @@ public class AdService : MonoBehaviour, IUnityAdsInitializationListener, IUnityA
     // Auto-initialize on play (safe: no-op if already initialized)
     private void Start()
     {
-        Initialize();
     }
 
     // ---------- Logging helpers ----------

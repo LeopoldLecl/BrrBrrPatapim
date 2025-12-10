@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f8128de42a4b07ac9d30721e6a0730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AdService
-  interstitialPlacementId: video
-  rewardedPlacementId: rewardedVideo
+  interstitialPlacementId: Interstitial_Android
+  rewardedPlacementId: Rewarded_Android
   androidGameId: 5978493
-  iOSGameId: 5978493
-  testMode: 1
-  logVerbosity: 2
+  iOSGameId: 5978492
+  testMode: 0
+  logVerbosity: 3
