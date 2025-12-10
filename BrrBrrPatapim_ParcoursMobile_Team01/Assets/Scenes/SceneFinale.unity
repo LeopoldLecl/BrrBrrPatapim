@@ -2563,6 +2563,7 @@ GameObject:
   - component: {fileID: 343077196}
   - component: {fileID: 343077195}
   - component: {fileID: 343077194}
+  - component: {fileID: 343077197}
   m_Layer: 5
   m_Name: SpinButton
   m_TagString: Untagged
@@ -2634,9 +2635,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 668472703}
-        m_TargetAssemblyTypeName: AdService, Assembly-CSharp
-        m_MethodName: SetCurrentReward
+      - m_Target: {fileID: 343077197}
+        m_TargetAssemblyTypeName: CustomAdButton, Assembly-CSharp
+        m_MethodName: SetAdReward
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2646,9 +2647,9 @@ MonoBehaviour:
           m_StringArgument: wheel
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 668472703}
-        m_TargetAssemblyTypeName: AdService, Assembly-CSharp
-        m_MethodName: ShowRewardedAd
+      - m_Target: {fileID: 343077197}
+        m_TargetAssemblyTypeName: CustomAdButton, Assembly-CSharp
+        m_MethodName: PlayRewardedAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2696,6 +2697,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 343077192}
   m_CullTransparentMesh: 1
+--- !u!114 &343077197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343077192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12424d6d61abff14c9b8b2ca81f49437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomAdButton
 --- !u!1001 &373004299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3566,17 +3579,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4830309462505388, guid: 4c1bf3b40f8780f43a1016e48a8ba85d, type: 3}
   m_PrefabInstance: {fileID: 667377188}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &668472703 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7608718166808563544, guid: 9db50a0cac796364ab215ec34192de92, type: 3}
-  m_PrefabInstance: {fileID: 939730250}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42f8128de42a4b07ac9d30721e6a0730, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AdService
 --- !u!1001 &674961099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6637,10 +6639,14 @@ PrefabInstance:
     - target: {fileID: 2317410994224617382, guid: 78cca77b020308e469e2ad92fb3af2b8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 668472703}
+      objectReference: {fileID: 1566963350}
     - target: {fileID: 2317410994224617382, guid: 78cca77b020308e469e2ad92fb3af2b8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowRewardedAd
+      value: PlayRewardedAd
+      objectReference: {fileID: 0}
+    - target: {fileID: 2317410994224617382, guid: 78cca77b020308e469e2ad92fb3af2b8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CustomAdButton, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7566146487963018311, guid: 78cca77b020308e469e2ad92fb3af2b8, type: 3}
       propertyPath: m_Pivot.x
@@ -6740,7 +6746,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7566146487963018311, guid: 78cca77b020308e469e2ad92fb3af2b8, type: 3}
       insertIndex: 1
       addedObject: {fileID: 2072705304}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1494006290620304708, guid: 78cca77b020308e469e2ad92fb3af2b8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1566963350}
   m_SourcePrefab: {fileID: 100100000, guid: 78cca77b020308e469e2ad92fb3af2b8, type: 3}
 --- !u!224 &1180654957 stripped
 RectTransform:
@@ -8243,6 +8252,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423176428}
   m_CullTransparentMesh: 1
+--- !u!1 &1432851666 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3628655704194426298, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+  m_PrefabInstance: {fileID: 8738876013046219904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1443350936
 GameObject:
   m_ObjectHideFlags: 0
@@ -8816,6 +8830,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &1566963346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1494006290620304708, guid: 78cca77b020308e469e2ad92fb3af2b8, type: 3}
+  m_PrefabInstance: {fileID: 1180654956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1566963350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566963346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12424d6d61abff14c9b8b2ca81f49437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomAdButton
 --- !u!1001 &1584196016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16281,7 +16312,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1658196864}
     - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
@@ -16289,7 +16328,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 770969515}
     - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1432851666}
+    - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
@@ -16297,8 +16348,20 @@ PrefabInstance:
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022514136480059556, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7038289542998672571, guid: a23293b63226e9941a5ad07ed8580c1e, type: 3}
       propertyPath: m_AnchorMax.y
